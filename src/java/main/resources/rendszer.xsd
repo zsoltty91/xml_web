@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    
+    <xs:simpleType name="erdemjegy-hu">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A magyar rendszer szerinti érdemjegy 1 és 5 között.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="napok-hu">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A hét napjai magyarul.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="hétfő"/>
+            <xs:enumeration value="kedd"/>
+            <xs:enumeration value="szerda"/>
+            <xs:enumeration value="csütörtök"/>
+            <xs:enumeration value="péntek"/>
+            <xs:enumeration value="szombat"/>
+            <xs:enumeration value="vasárnap"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="emailType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Az email formátumra korlátozva.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="rendszer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tanevek" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="diakok" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="tanarok" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="termek" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="osztalyok" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="tantargyak" minOccurs="0" maxOccurs="1"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:keyref name="jegy-tanev-keyref" refer="tanev-id">
+            <xs:selector xpath="diakok/diak/jegyei/jegy/tanev"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>        
+        <xs:keyref name="tanar-osztalya-keyref" refer="osztaly-id">
+            <xs:selector xpath="tanarok/tanar/osztalya"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>        
+        <xs:keyref name="osztaly-tanev-keyref" refer="tanev-id">
+            <xs:selector xpath="osztalyok/osztaly/tanev"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>
+        <xs:keyref name="osztaly-osztalyfonok-keyref" refer="tanar-id">
+            <xs:selector xpath="osztalyok/osztaly/osztalyfonok"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>
+        <xs:keyref name="osztaly-diak-keyref" refer="diak-id">
+            <xs:selector xpath="osztalyok/osztaly/diakok/diak"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>        
+        <xs:keyref name="orarend-tantargy-keyref" refer="tantargy-id">
+            <xs:selector xpath="osztalyok/osztaly/orarend/ora/tantargy"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>        
+        <xs:keyref name="orarend-tanar-keyref" refer="tanar-id">
+            <xs:selector xpath="osztalyok/osztaly/orarend/ora/tanar"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>
+        <xs:keyref name="orarend-terem-keyref" refer="terem-id">
+            <xs:selector xpath="osztalyok/osztaly/orarend/ora/terem"></xs:selector>
+            <xs:field xpath="."></xs:field>
+        </xs:keyref>
+    </xs:element>
+
+    <xs:element name="tanevek">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tanev"></xs:element>        
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="tanev-id">
+            <xs:selector xpath="tanev"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="tanev">
+        <xs:complexType>            
+            <xs:sequence>                
+                <xs:element name="mettol" minOccurs="1" maxOccurs="1" type="xs:date"></xs:element>
+                <xs:element name="meddig" minOccurs="1" maxOccurs="1" type="xs:date"></xs:element>
+                <xs:element ref="szunetek"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
+        </xs:complexType>                
+    </xs:element>
+    
+    <xs:element name="szunetek">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="szunet" minOccurs="0" maxOccurs="unbounded"></xs:element>                
+            </xs:sequence>            
+        </xs:complexType>
+        <xs:key name="szunet-id">
+            <xs:selector xpath="szunet"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="szunet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nev" minOccurs="1" maxOccurs="1" type="xs:token"/>    
+                <xs:element name="mettol" minOccurs="1" maxOccurs="1" type="xs:date"></xs:element>
+                <xs:element name="meddig" minOccurs="1" maxOccurs="1" type="xs:date"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="diakok">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="diak" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="diak-id">
+            <xs:selector xpath="diak"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="diak">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nev" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="email" minOccurs="0" maxOccurs="1" type="emailType"></xs:element>
+                <xs:element ref="jegyei" minOccurs="0" maxOccurs="1"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="jegyei">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="jegy" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="tantargy" type="xs:token"></xs:element>
+                            <xs:element name="tanev" type="xs:token"></xs:element>
+                            <xs:element name="erdemjegy" type="erdemjegy-hu">                                
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
+                    </xs:complexType>                    
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="jegy-id">
+            <xs:selector xpath="jegy"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>  
+    
+    <xs:element name="tanarok">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tanar" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="tanar-id">
+            <xs:selector xpath="tanar"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="tanar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nev" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="email" minOccurs="0" maxOccurs="1" type="emailType"></xs:element>
+                <xs:element name="osztalya" minOccurs="0" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="fogadoorak" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fogadoora" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nap" type="napok-hu"></xs:element>
+                                        <xs:element name="idopont" type="xs:time"></xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="termek">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="terem" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="terem-id">
+            <xs:selector xpath="terem"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="terem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="labor" minOccurs="1" maxOccurs="1" type="xs:boolean"/>                    
+                <xs:element name="projektor" minOccurs="1" maxOccurs="1" type="xs:boolean"/>
+                <xs:element name="ferohely" minOccurs="1" maxOccurs="1" type="xs:positiveInteger"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="osztalyok">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="osztaly"></xs:element>
+            </xs:sequence>
+        </xs:complexType>    
+        <xs:key name="osztaly-id">
+            <xs:selector xpath="osztaly"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+    
+    <xs:element name="osztaly">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nev" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="tanev" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="osztalyfonok" minOccurs="0" maxOccurs="1" type="xs:integer"></xs:element>
+                <xs:element name="diakok" minOccurs="1" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="diak" minOccurs="1" maxOccurs="unbounded" type="xs:integer"></xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="orarend" minOccurs="1" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ora" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nap" minOccurs="1" maxOccurs="1" type="napok-hu"></xs:element>
+                                        <xs:element name="idopont" minOccurs="1" maxOccurs="1" type="xs:time"></xs:element>
+                                        <xs:element name="tantargy" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                                        <xs:element name="tanar" minOccurs="1" maxOccurs="1" type="xs:integer"></xs:element>
+                                        <xs:element name="terem" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
+        </xs:complexType>    
+    </xs:element>
+    
+    <xs:element name="tantargyak">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tantargy" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>                        
+                        <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
+                        <xs:attribute name="nev" use="required" type="xs:token"></xs:attribute>
+                    </xs:complexType>                    
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="tantargy-id">
+            <xs:selector xpath="tantargy"></xs:selector>
+            <xs:field xpath="@id"></xs:field>
+        </xs:key>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rendszer>
+    <tanevek>
+        <tanev id="2014/2015">
+            <mettol> 2014-09-01 </mettol>
+            <meddig> 2015-06-30 </meddig>
+            <szunetek>
+                <szunet id="1">
+                    <nev>Őszi szünet</nev>
+                    <mettol> 2014-10-27 </mettol>
+                    <meddig> 2014-10-31 </meddig>
+                </szunet>
+                <szunet id="2">
+                    <nev>Téli szünet</nev>
+                    <mettol> 2014-12-22 </mettol>
+                    <meddig> 2015-01-04 </meddig>
+                </szunet>
+            </szunetek>
+        </tanev>
+    </tanevek>
+    <diakok>
+        <diak id="1">
+            <nev>Reményi Szabolcs</nev>
+            <email>szabolcs.remenyi@gmail.com</email>            
+        </diak>
+        <diak id="2">
+            <nev>Fehérvári Zsolt</nev>
+            <email>zsoltty91@hotmail.com</email>
+            <jegyei>
+                <jegy id="1">
+                    <tantargy>K001</tantargy>
+                    <tanev>2014/2015</tanev>                    
+                    <erdemjegy>5</erdemjegy>
+                </jegy>
+            </jegyei>
+        </diak>
+    </diakok>
+    <tanarok>
+        <tanar id="1">
+            <nev>Kiss László</nev>
+            <email>kiss.laszlo@gmail.com</email>
+            <osztaly>9/D-14/15</osztaly>            
+            <fogadoorak>
+                <fogadoora id="1">
+                    <nap>hétfő</nap>                    
+                    <idopont>08:00:00</idopont>
+                </fogadoora>
+                <fogadoora id="2">
+                    <nap>kedd</nap>
+                    <idopont>08:00:00</idopont>
+                </fogadoora>
+            </fogadoorak>
+        </tanar>
+        <tanar id="2">
+            <nev>Komoróczy Tamás</nev>
+            <email>tamas.komoroczy@gmail.com</email>
+            <fogadoorak>
+                <fogadoora id="3">
+                    <nap>szerda</nap>
+                    <idopont>12:00:00</idopont>
+                </fogadoora>
+            </fogadoorak>
+        </tanar>
+    </tanarok>
+    <termek>
+        <terem id="201">
+            <labor>true</labor>
+            <projektor>false</projektor>
+            <ferohely>15</ferohely>
+        </terem>
+        <terem id="202">
+            <labor>true</labor>
+            <projektor>true</projektor>
+            <ferohely>15</ferohely>
+        </terem>
+        <terem id="105">
+            <labor>false</labor>
+            <projektor>false</projektor>
+            <ferohely>32</ferohely>
+        </terem>
+    </termek>
+    <osztalyok>
+        <osztaly id="9/D-14/15">
+            <nev>9/D</nev>
+            <tanev>2014/2015</tanev>
+            <tanar>1</tanar>
+            <diakok>
+                <diak>1</diak>
+                <diak>2</diak>
+            </diakok>
+            <orarend>
+                <ora id="1">                    
+                    <nap>hétfő</nap>
+                    <idopont>10:00:00</idopont>
+                    <tantargy>K001</tantargy>
+                    <tanar>1</tanar>
+                    <terem>202</terem>
+                </ora>
+                <ora id="2">
+                    <nap>hétfő</nap>
+                    <idopont>12:00:00</idopont>
+                    <tantargy>K003</tantargy>
+                    <tanar>2</tanar>
+                    <terem>201</terem>
+                </ora>
+            </orarend>
+        </osztaly>
+    </osztalyok>
+    <tantargyak>
+        <tantargy id="K001" nev="Matematika"/>
+        <tantargy id="K002" nev="Irodalom"/>
+        <tantargy id="K003" nev="Informatika"/>
+    </tantargyak>
+</rendszer>
