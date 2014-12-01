@@ -15,3 +15,9 @@ hs_err_pid*
 !/xml_web/src/java/main/resources/basex-7.3.1.jar
 /xml_web/build/
 /dist/
+/WebApplication1/nbproject/private/
+/WebApplication1/build/
+!/src/java/main/resources/basex-7.3.1.jar
+!/src/java/main/resources/commons-lang3-3.3.2.jar
+!/src/java/main/resources/log4j-1.2.17.jar
+!/src/java/main/resources/joda-time-2.4.jar

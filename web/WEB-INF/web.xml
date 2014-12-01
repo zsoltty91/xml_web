@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+   
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-	
-	<servlet>
-        <servlet-name>Log4j</servlet-name>
-        <servlet-class>log.InitLog4j</servlet-class>
-        <init-param>
-            <param-name>logPath</param-name>
-            <param-value>/WEB-INF/logs/error.log</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-	<!--
+    
+    <!--
 	<servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>login.LoginServlet</servlet-class>
@@ -30,14 +22,7 @@
         <filter-name>AccessStudent</filter-name>
         <url-pattern>/student/*</url-pattern>
     </filter-mapping>-->
-	
-	 <jsp-config>
-        <jsp-property-group>
-            <url-pattern>/*</url-pattern>
-            <include-prelude>/include/header.jsp</include-prelude>
-            <include-coda>/include/footer.jsp</include-coda>
-        </jsp-property-group>
-    </jsp-config>
+    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
