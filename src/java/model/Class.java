@@ -61,6 +61,14 @@ public class Class implements XmlID {
         this.lessons = lessons;
     }
 
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+    
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+    
     public String getId() {
         return id;
     }

@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
@@ -25,10 +24,6 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 @XmlRootElement(name = "tanar")
 public class Teacher extends Person {
 
-    @XmlElement(name = "osztaly")
-    @XmlJavaTypeAdapter(ClassAdapter.class)
-    private Class form;
-
     @XmlElementWrapper(name = "fogadoorak")
     @XmlElement(name = "fogadoora")
     private ArrayList<ConsultingHour> consultingHours;
@@ -37,18 +32,9 @@ public class Teacher extends Person {
         consultingHours = new ArrayList<>();
     }
 
-    public Teacher(String id, Class form, ArrayList<ConsultingHour> consultingHours, String name, String email) {
+    public Teacher(String id, ArrayList<ConsultingHour> consultingHours, String name, String email) {
         super(id, name, email);
-        this.form = form;
         this.consultingHours = consultingHours;
-    }
-
-    public Class getForm() {
-        return form;
-    }
-
-    public void setForm(Class form) {
-        this.form = form;
     }
 
     public ArrayList<ConsultingHour> getConsultingHours() {

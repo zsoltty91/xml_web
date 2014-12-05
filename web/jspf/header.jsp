@@ -37,8 +37,8 @@
                     <li><a href='index.jsp'><span>Kezdőlap</span></a></li>
                     <li class='has-sub '><a href=''><span>Tanárok</span></a>
                         <ul>
-                            <li><a href='/Epitoipar/menedzser/felhasznalok/users.jsp'><span>Keresés</span></a></li>
-                            <li><a href='/Epitoipar/menedzser/felhasznalok/createuser.jsp'><span>Hozzáadás</span></a></li>
+                            <li><a href='users.jsp'><span>Keresés</span></a></li>
+                            <li><a href='createuser.jsp'><span>Hozzáadás</span></a></li>
                         </ul>
                     </li>
                 </ul>

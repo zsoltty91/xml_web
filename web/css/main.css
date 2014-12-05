@@ -19,6 +19,14 @@ body {
     -webkit-border-top-left-radius: 8px;
 }
 
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
 .profilicon {
     float:right;
     margin-right: 60px;
@@ -82,13 +90,18 @@ body {
        background-color: #ddd;
 }
 
+#content form {
+    width: 40%;
+    margin-bottom: 30px;
+}
+
 #content {
     background-color:#EEEEEE;
     padding-top: 30px;
     padding-left: 50px;
     padding-bottom: 30px;
     min-height:400px;
-    width:850px;
+    width:90%;
     float:left;
     color: #444;
     alignment-adjust: middle;
@@ -311,7 +324,7 @@ input#submit:hover{
 }
 
 #footer {
-    margin-top: 20px;
+    margin-top: 30px;
     padding-top: 2px;
     height:25px;
     clear:both;

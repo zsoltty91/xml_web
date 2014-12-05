@@ -100,6 +100,14 @@ public class Lesson implements XmlID {
         this.room = room;
     }
 
+    public Days getDay() {
+        return day;
+    }
+
+    public void setDay(Days day) {
+        this.day = day;
+    }
+
     public static Lesson find(String id) throws JAXBException, IOException {
         return new LessonDAO().find(id);
     }
