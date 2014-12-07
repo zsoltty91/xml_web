@@ -114,5 +114,37 @@
         </table>      
     </fieldset>
 </form>
+    <form class="left" action="<c:url value="AddConsultingHourServlet"/>" method="post" >
+    <fieldset>
+        <legend>Fogadóóra hozzáadása</legend>
+        <table align="center">
+            <tr>
+            <select name="tanar">
+                ${errm}
+                <c_rt:forEach var="tanar" items="${teachers}">
+                    <option value="${tanar.id}">${tanar.nev}</option>
+                </c_rt:forEach>
+            </select>
+            </tr>
+            <tr>
+                <td>Nap:</td>
+                <td>
+                    <input type="text" name="nap"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Idő:</td>
+                <td>
+                    <input type="text" name="ido"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" >
+                    <input type="submit" value="Létrehozás" />
+                </td>
+            </tr>
+        </table>      
+    </fieldset>
+</form>
 
 <%@include file="jspf/footer.jsp" %>

@@ -56,7 +56,7 @@ public class DefaultDAO<T extends Object> {
      */
     protected T getObjectByQuery(String query) throws JAXBException, IOException {
         ArrayList<String> res = query(query);
-        return res.isEmpty() ? null : getObject(res.get(0));
+         return res.isEmpty() ? null : getObject(res.get(0));
     }
 
     /*

@@ -31,15 +31,15 @@ public class Database {
         Properties prop = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream(new File("src\\main\\resources\\database.properties"));
-           
+            //input = new FileInputStream(new File("src\\main\\resources\\database.properties"));
+           input = this.getClass().getResourceAsStream("database.properties");
             prop.load(input);
             host = prop.getProperty("host");
             port = Integer.parseInt(prop.getProperty("port"));
             user = prop.getProperty("user");
             pass = prop.getProperty("pass");
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            logger.error(ex.getMessage());
         } finally {
             if (input != null) {
                 try {

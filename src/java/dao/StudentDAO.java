@@ -51,6 +51,7 @@ public class StudentDAO extends DefaultDAO<Student>{
     public void remove() throws IOException {
          try {
             executeQuery("delete node doc('rendszer')/rendszer/diakok/diak[@id='"+object.getId()+"']");
+           executeQuery("delete node doc('rendszer')//diak[.='"+object.getId()+"']");
         } finally {
             closeConnection();
         }

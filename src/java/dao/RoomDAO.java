@@ -51,6 +51,7 @@ public class RoomDAO extends DefaultDAO<Room> {
     public void remove() throws IOException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/termek/terem[@id='" + object.getId() + "']");
+            executeQuery("delete node doc('rendszer')//ora[terem[.='" + object.getId() + "']]");
         } finally {
             closeConnection();
         }

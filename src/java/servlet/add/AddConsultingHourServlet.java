@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.add;
 
+import java.time.LocalTime;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.ConsultingHour;
+import model.Days;
 import model.Mark;
 import model.SchoolYear;
 import model.Student;
@@ -18,25 +21,26 @@ import model.Teacher;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddSubjectServlet")
-public class AddSubjectServlet extends servlets.CommonServlet {
-    
+@WebServlet(value = "/AddConsultingHourServlet")
+public class AddConsultingHourServlet extends servlets.CommonServlet {
+
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String id = request.getParameter("id");
-        String nev = request.getParameter("nev");
-        
-        if (!(id.isEmpty() || nev.isEmpty())) {
-            Subject subject = new Subject();
-            subject.setId(id);
-            subject.setName(nev);
+        String day = request.getParameter("nap");
+        String ido = request.getParameter("ido");
+        String tanar = request.getParameter("tanar");
+        if (!(day.isEmpty() || tanar.isEmpty() || ido.isEmpty())) {
+            ConsultingHour consult = new ConsultingHour();
+            consult.setDay(Days.valueOf(day));
+            consult.setHour(LocalTime.parse(ido));
             try {
-               subject.add();
+                consult.add(tanar);
+                  successm="Sikeresen hozzáadva!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
             }
         }
-        
+
     }
 }

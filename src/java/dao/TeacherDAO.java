@@ -51,6 +51,8 @@ public class TeacherDAO extends DefaultDAO<Teacher> {
     public void remove() throws IOException {
        try {
             executeQuery("delete node doc('rendszer')/rendszer/tanarok/tanar[@id='"+object.getId()+"']");
+            executeQuery("delete node doc('rendszer')//ora[tanar[.='"+object.getId()+"']]");
+            executeQuery("delete node doc('rendszer')//tanar[.='"+object.getId()+"']");
         } finally {
             closeConnection();
         }

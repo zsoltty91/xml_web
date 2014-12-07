@@ -51,6 +51,8 @@ public class SubjectDAO extends DefaultDAO<Subject> {
     public void remove() throws IOException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/tantargyak/tantargy[@id='"+object.getId()+"']");
+            executeQuery("delete node doc('rendszer')/rendszer//ora[tantargy[.='"+object.getId()+"']");
+            executeQuery("delete node doc('rendszer')/rendszer//jegy[tantargy[.='"+object.getId()+"']");
         } finally {
             closeConnection();
         }

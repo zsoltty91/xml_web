@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.remove;
 
 import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
@@ -17,23 +17,24 @@ import model.Teacher;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddStudentToClassServlet")
-public class AddStudentToClassServlet extends servlets.CommonServlet {
+@WebServlet(value = "/RemoveStudentFromClassServlet")
+public class RemoveStudentFromClassServlet extends servlets.CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String osztaly = request.getParameter("osztaly");
-        String tanulo = request.getParameter("tanulo");
-         
-        if (!(osztaly.isEmpty() || tanulo.isEmpty())) {
+        String studentId = request.getParameter("studentId");
+        String classId = request.getParameter("classId");
+
+        if (!(studentId.isEmpty() || classId.isEmpty())) {
             Student student = new Student();
-            student.setId(tanulo);
+            student.setId(studentId);
             try {
-                model.Class osztalyObj = model.Class.find(osztaly);
-                osztalyObj.remove();
-                osztalyObj.addStudent(student);
-                osztalyObj.add();
+                model.Class classObj = model.Class.find(classId);
+                classObj.removeStudent(student);
+                classObj.remove();
+                classObj.add();
+                successm = "Sikeresen törölve!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
             }

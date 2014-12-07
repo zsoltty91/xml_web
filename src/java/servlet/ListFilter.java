@@ -21,6 +21,7 @@ import model.SchoolYear;
 import model.Student;
 import model.Subject;
 import model.Teacher;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -30,6 +31,7 @@ public class ListFilter implements Filter {
     
     private static final boolean debug = true;
 
+    Logger logger = Logger.getLogger(ListFilter.class);
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
@@ -46,6 +48,7 @@ public class ListFilter implements Filter {
             throws IOException, ServletException {
         try {
             request.setAttribute("students", Student.findAll());
+            logger.info(Student.findAll().toString());
             request.setAttribute("teachers", Teacher.findAll());
             request.setAttribute("schoolYears", SchoolYear.findAll());
             request.setAttribute("rooms", Room.findAll());
@@ -53,6 +56,7 @@ public class ListFilter implements Filter {
             request.setAttribute("classes", model.Class.findAll());
         } catch (Exception ex) {
             request.setAttribute("errm", ex.getMessage());
+            logger.error(ex.getMessage());
         }
         
     }

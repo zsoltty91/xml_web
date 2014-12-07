@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.add;
 
 import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Holiday;
-import model.Room;
 import model.SchoolYear;
 import model.Student;
 
@@ -18,24 +17,23 @@ import model.Student;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddRoomServlet")
-public class AddRoomServlet extends servlets.CommonServlet {
+@WebServlet(value = "/AddHolidayServlet")
+public class AddHolidayServlet extends servlets.CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String szam = request.getParameter("szam");
-        String labor = request.getParameter("labor");
-        String projektor = request.getParameter("projektor");
-        String ferohely = request.getParameter("ferohely");
-        if (!(szam.isEmpty() || labor.isEmpty() || projektor.isEmpty() || ferohely.isEmpty())) {
-            Room room = new Room();
-            room.setId(szam);
-            room.setLabor(new Boolean(labor));
-            room.setProjektor(new Boolean(projektor));
+        String nev = request.getParameter("nev");
+        String tanev = request.getParameter("tanev");
+        String mettol = request.getParameter("mettol");
+        String meddig = request.getParameter("meddig");
+        if (!(nev.isEmpty() || tanev.isEmpty() || mettol.isEmpty() || meddig.isEmpty())) {
+            Holiday holiday = new Holiday();
+            holiday.setFrom(LocalDate.parse(mettol));
+            holiday.setTo(LocalDate.parse(meddig));
             try {
-                room.setFerohely(Integer.parseInt(ferohely));
-                room.add();
+                holiday.add(tanev);
+                  successm="Sikeresen hozzáadva!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
             }

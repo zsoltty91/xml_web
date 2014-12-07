@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.remove;
 
 import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
@@ -11,25 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.SchoolYear;
 import model.Student;
+import model.Teacher;
 
 /**
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddSchoolYearServlet")
-public class AddSchoolYearServlet extends servlets.CommonServlet {
+@WebServlet(value = "/RemoveClassServlet")
+public class RemoveClassServlet extends servlets.CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String mettol = request.getParameter("mettol");
-        String meddig = request.getParameter("meddig");
-        if (!(mettol.isEmpty() || meddig.isEmpty())) {
-            SchoolYear schoolYear = new SchoolYear();
-            schoolYear.setFrom(LocalDate.parse(mettol));
-            schoolYear.setTo(LocalDate.parse(meddig));
+        String id = request.getParameter("id");
+
+        if (!(id.isEmpty())) {
+            model.Class osztaly = new model.Class();
+            osztaly.setId(id);
+            successm = "Sikeresen törölve!";
             try {
-                schoolYear.add();
+                osztaly.remove();
             } catch (Exception ex) {
                 errm = ex.getMessage();
             }
