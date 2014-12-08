@@ -40,7 +40,14 @@ public class StudentDAO extends DefaultDAO<Student>{
         }
     }
     
+    public void generateId() throws IOException {
+        String query = query("inf:max-id-diak()").get(0);
+        logger.info("Max id:"+query);
+        object.setId(Integer.toString(Integer.parseInt(query)+1));
+    }
+    
     public void add() throws IOException, JAXBException {
+        generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/diakok");
         } finally {

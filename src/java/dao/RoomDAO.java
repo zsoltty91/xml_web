@@ -40,6 +40,8 @@ public class RoomDAO extends DefaultDAO<Room> {
         }
     }
 
+  
+
     public void add() throws JAXBException, IOException {
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/termek");

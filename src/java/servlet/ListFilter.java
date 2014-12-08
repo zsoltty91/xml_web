@@ -48,7 +48,6 @@ public class ListFilter implements Filter {
             throws IOException, ServletException {
         try {
             request.setAttribute("students", Student.findAll());
-            logger.info(Student.findAll().toString());
             request.setAttribute("teachers", Teacher.findAll());
             request.setAttribute("schoolYears", SchoolYear.findAll());
             request.setAttribute("rooms", Room.findAll());

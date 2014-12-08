@@ -40,7 +40,14 @@ public class LessonDAO extends DefaultDAO<Lesson> {
         }
     }
 
+    public void generateId() throws IOException {
+        String query = query("inf:max-id-ora()").get(0);
+        logger.info("Max id:"+query);
+        object.setId(Integer.toString(Integer.parseInt(query)+1));
+    }
+    
     public void add(String classId) throws JAXBException, IOException {
+        generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/osztalyok/osztaly[@id='" + classId + "']/orarend");
         } finally {

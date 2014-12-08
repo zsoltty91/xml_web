@@ -40,7 +40,14 @@ public class HolidayDAO extends DefaultDAO<Holiday> {
         }
     }
 
+    public void generateId() throws IOException {
+        String query = query("inf:max-id-szunet()").get(0);
+        logger.info("Max id:"+query);
+        object.setId(Integer.toString(Integer.parseInt(query)+1));
+    }
+    
     public void add(String schoolYearId) throws JAXBException, IOException {
+        generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tanevek/tanev[@id='" + schoolYearId + "']/szunetek");
         } finally {

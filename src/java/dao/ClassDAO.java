@@ -39,12 +39,11 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         }
     }
 
-    public String generateId() {
+    public void generateId() {
         StringBuilder sb = new StringBuilder();
-        //sb.append(this.object.getName()).append("-").append(this.object.getSchoolYear().getFrom()).append("/").append(this.object.getSchoolYear().getTo());
-        sb.append("a");
+        sb.append(this.object.getName()).append("-").append(this.object.getSchoolYear().getFrom().getYear()).append("/").append(this.object.getSchoolYear().getTo().getYear());
         logger.info(sb);
-        return sb.toString();
+        object.setId(sb.toString());
     }
     
     public void add() throws JAXBException, IOException {

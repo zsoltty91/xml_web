@@ -40,7 +40,14 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         }
     }
 
+    public void generateId() throws IOException {
+        String query = query("inf:max-id-tantargy()").get(0);
+        logger.info("Max id:"+query);
+        object.setId(Integer.toString(Integer.parseInt(query)+1));
+    }
+    
     public void add() throws IOException, JAXBException {
+        generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tantargyak");
         } finally {
