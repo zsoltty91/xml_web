@@ -19,8 +19,8 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         super(model.Class.class);
     }
 
-    public ClassDAO(model.Class clazz) {
-        super(model.Class.class, clazz);
+    public ClassDAO(model.Class clazz) {        
+        super(model.Class.class, clazz);        
     }
 
     public model.Class find(String id) throws JAXBException, IOException {
@@ -39,7 +39,16 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         }
     }
 
+    public String generateId() {
+        StringBuilder sb = new StringBuilder();
+        //sb.append(this.object.getName()).append("-").append(this.object.getSchoolYear().getFrom()).append("/").append(this.object.getSchoolYear().getTo());
+        sb.append("a");
+        logger.info(sb);
+        return sb.toString();
+    }
+    
     public void add() throws JAXBException, IOException {
+        generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/osztalyok");
         } finally {

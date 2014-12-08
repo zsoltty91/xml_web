@@ -89,5 +89,5 @@ public class DefaultDAO<T extends Object> {
 
     protected String getXml(T object) throws JAXBException {
         return JAXBUtil.toXML(object);
-    }
+    }        
 }

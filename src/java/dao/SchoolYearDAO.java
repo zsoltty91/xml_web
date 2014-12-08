@@ -39,8 +39,17 @@ public class SchoolYearDAO extends DefaultDAO<SchoolYear> {
             closeConnection();
         }
     }
+        
+    public void generateId() {
+        int from = this.object.getFrom().getYear();
+        int to = this.object.getTo().getYear();        
+        StringBuffer sb = new StringBuffer();
+        sb.append(from).append("/").append(to);
+        this.object.setId(sb.toString());
+    }
 
     public void add() throws JAXBException, IOException {
+        generateId();        
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tanevek");
         } finally {
