@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
+import model.Teacher;
 import servlet.CommonServlet;
 
 /**
@@ -24,11 +25,11 @@ public class AddTeacherServlet extends CommonServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         if (!(name.isEmpty() || email.isEmpty())) {
-            Student student = new Student();
-            student.setEmail(email);
-            student.setName(name);
+            Teacher teacher = new Teacher();
+            teacher.setEmail(email);
+            teacher.setName(name);
             try {
-                student.add();
+                teacher.add();
                 successm = "Sikeresen hozzáadva!";
             } catch (Exception ex) {
                 errm = ex.getMessage();

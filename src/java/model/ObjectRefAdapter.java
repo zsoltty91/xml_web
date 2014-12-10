@@ -31,7 +31,7 @@ public class ObjectRefAdapter<T extends XmlID> extends XmlAdapter<String, T> {
         }
         T t = clazz.newInstance();
         t.setId(v);
-        logger.debug(t.toString());
+        //logger.debug(t.toString());
         return t;
     }
 

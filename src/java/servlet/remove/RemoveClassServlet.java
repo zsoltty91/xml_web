@@ -25,9 +25,9 @@ public class RemoveClassServlet extends CommonServlet {
         if (!(id.isEmpty())) {
             model.Class osztaly = new model.Class();
             osztaly.setId(id);
-            successm = "Sikeresen törölve!";
             try {
                 osztaly.remove();
+                successm = "Sikeresen törölve!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
             }

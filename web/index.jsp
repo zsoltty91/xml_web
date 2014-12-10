@@ -18,7 +18,7 @@
             <tr>
                 <td>Név:</td>
                 <td>
-                    <input type="text" name="nev"/>
+                    <input type="text" name="name"/>
                 </td>
             </tr>
             <tr>
@@ -42,7 +42,7 @@
             <tr>
                 <td>Név:</td>
                 <td>
-                    <input type="text" name="nev"/>
+                    <input type="text" name="name"/>
                 </td>
             </tr>
             <tr>
@@ -71,11 +71,21 @@
                 </td>
             </tr>
             <tr>
+                <td>Tanév:</td>
+                <td>
+                    <select name="tanev">
+                        <c_rt:forEach var="schoolYear" items="${schoolYears}">
+                            <option value="${schoolYear.id}" selected>${schoolYear.id}</option>
+                        </c_rt:forEach>          
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Osztályfőnök:</td>
                 <td>
-                    <select name="osztalyfonok">
+                    <select name="tanar">
                         <c_rt:forEach var="teacher" items="${teachers}">
-                            <option value="${teacher.id}" selected>{$teacher.name}</option>
+                            <option value="${teacher.id}" selected>${teacher.name}</option>
                         </c_rt:forEach>          
                     </select>
                 </td>
