@@ -23,7 +23,7 @@ public class AddMarkServlet extends CommonServlet {
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String targy = request.getParameter("targy");
+        String targy = request.getParameter("tantargy");
         String tanev = request.getParameter("tanev");
         String jegy = request.getParameter("jegy");
         String diak = request.getParameter("diak");

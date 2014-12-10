@@ -6,6 +6,7 @@
 package servlet.add;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ public class AddSchoolYearServlet extends CommonServlet {
         String meddig = request.getParameter("meddig");
         if (!(mettol.isEmpty() || meddig.isEmpty())) {
             SchoolYear schoolYear = new SchoolYear();
+            schoolYear.setHolidays(new ArrayList<>());
             schoolYear.setFrom(LocalDate.parse(mettol));
             schoolYear.setTo(LocalDate.parse(meddig));
             try {

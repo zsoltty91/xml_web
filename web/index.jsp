@@ -3,6 +3,7 @@
     Created on : 2012.10.14., 21:08:32
     Author     : zsolti
 --%>
+<%@page import="model.Days"%>
 <%@page import="model.Student"%>
 <%@page import="java.util.ArrayList"%>
 <%@taglib prefix="c_rt" uri="http://java.sun.com/jstl/core_rt" %>
@@ -121,21 +122,24 @@
         <legend>Fogadóóra hozzáadása</legend>
         <table align="center">
             <tr>
-            <select name="tanar">
-                <c_rt:forEach var="tanar" items="${teachers}">
-                    <option value="${tanar.id}">${tanar.name}</option>
-                </c_rt:forEach>
-            </select>
+                <td>Tanár:</td>
+                <td>
+                    <select name="tanar">
+                        <c_rt:forEach var="tanar" items="${teachers}">
+                            <option value="${tanar.id}">${tanar.name}</option>
+                        </c_rt:forEach>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Nap:</td>
                 <td>
-                    <select name="tanar">
-                        <option value="hétfő">hétfő</option>
-                        <option value="kedd">kedd</option>
-                        <option value="szerda">szerda</option>
-                        <option value="csütörötk">csütörtök</option>
-                        <option value="péntek">péntek</option>
+                    <select name="nap">
+                        <option value="HÉTFŐ">hétfő</option>
+                        <option value="KEDD">kedd</option>
+                        <option value="SZERDA">szerda</option>
+                        <option value="CSÜTÖRTÖK">csütörtök</option>
+                        <option value="PÉNTEK">péntek</option>
                     </select>
                 </td>
             </tr>
@@ -153,6 +157,103 @@
         </table>      
     </fieldset>
 </form>
+
+<form class="left" action="<c:url value="AddHolidayServlet"/>" method="post" >
+    <fieldset>
+        <legend>Szünet hozzáadása</legend>
+        <table align="center">
+            <tr>
+                <td>Név:</td>
+                <td>
+                    <input type="text" name="nev"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Tanév:</td>
+                <td>
+                    <select name="tanev">
+                        <c_rt:forEach var="tanev" items="${schoolYears}">
+                            <option value="${tanev.id}">${tanev.id}</option>
+                        </c_rt:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Mettől:</td>
+                <td>
+                    <input type="text" name="mettol"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Meddig:</td>
+                <td>
+                    <input type="text" name="meddig"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" >
+                    <input type="submit" value="Létrehozás" />
+                </td>
+            </tr>
+        </table>      
+    </fieldset>
+</form>    
+
+<form class="left" action="<c:url value="AddMarkServlet"/>" method="post" >
+    <fieldset>
+        <legend>Jegy beírása</legend>
+        <table align="center">
+            <tr>
+                <td>Diák</td>
+                <td>
+                    <select name="diak">
+                        <c_rt:forEach var="student" items="${students}">
+                            <option value="${student.id}">${student.name}</option>
+                        </c_rt:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Tanév:</td>
+                <td>
+                    <select name="tanev">
+                        <c_rt:forEach var="tanev" items="${schoolYears}">
+                            <option value="${tanev.id}">${tanev.id}</option>
+                        </c_rt:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Tantárgy:</td>
+                <td>
+                    <select name="tantargy">
+                        <c_rt:forEach var="subject" items="${subjects}">
+                            <option value="${subject.id}">${subject.name}</option>
+                        </c_rt:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Jegy:</td>
+                <td>
+                    <select name="jegy">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" >
+                    <input type="submit" value="Létrehozás" />
+                </td>
+            </tr>
+        </table>      
+    </fieldset>
+</form>        
 
 Students
 <table>

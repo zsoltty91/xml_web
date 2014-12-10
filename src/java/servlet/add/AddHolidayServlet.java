@@ -28,6 +28,7 @@ public class AddHolidayServlet extends CommonServlet {
         String meddig = request.getParameter("meddig");
         if (!(nev.isEmpty() || tanev.isEmpty() || mettol.isEmpty() || meddig.isEmpty())) {
             Holiday holiday = new Holiday();
+            holiday.setName(nev);
             holiday.setFrom(LocalDate.parse(mettol));
             holiday.setTo(LocalDate.parse(meddig));
             try {

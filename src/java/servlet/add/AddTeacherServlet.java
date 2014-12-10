@@ -5,6 +5,7 @@
  */
 package servlet.add;
 
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ public class AddTeacherServlet extends CommonServlet {
         String email = request.getParameter("email");
         if (!(name.isEmpty() || email.isEmpty())) {
             Teacher teacher = new Teacher();
+            teacher.setConsultingHours(new ArrayList<>());
             teacher.setEmail(email);
             teacher.setName(name);
             try {
