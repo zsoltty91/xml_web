@@ -24,7 +24,7 @@ public class TeacherDAO extends DefaultDAO<Teacher> {
         super(Teacher.class,teacher);
     }
 
-    public Teacher find(int id) throws JAXBException, IOException {
+    public Teacher find(String id) throws JAXBException, IOException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer/tanarok/tanar[@id='" + id + "']");
         } finally {

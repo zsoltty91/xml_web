@@ -16,13 +16,14 @@ import model.SchoolYear;
 import model.Student;
 import model.Subject;
 import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddConsultingHourServlet")
-public class AddConsultingHourServlet extends servlets.CommonServlet {
+public class AddConsultingHourServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

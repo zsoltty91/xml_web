@@ -36,7 +36,7 @@ public class Class implements XmlID {
     @XmlJavaTypeAdapter(SchoolYearAdapter.class)
     private SchoolYear schoolYear;
 
-    @XmlElement(name = "tanar")
+    @XmlElement(name = "osztalyfonok")
     @XmlJavaTypeAdapter(TeacherAdapter.class)
     private Teacher teacher;
 

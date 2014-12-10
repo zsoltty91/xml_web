@@ -45,7 +45,7 @@ public class Teacher extends Person {
         this.consultingHours = consultingHours;
     }
 
-    public static Teacher find(int id) throws JAXBException, IOException {
+    public static Teacher find(String id) throws JAXBException, IOException {
         return new TeacherDAO().find(id);
     }
 

@@ -2,14 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Room;
+import model.SchoolYear;
+import model.Student;
+import model.Subject;
+import model.Teacher;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +28,8 @@ public abstract class CommonServlet extends HttpServlet {
     public String successm = null;
     public String url = null;
 
+    Logger logger = Logger.getLogger(CommonServlet.class);
+    
     public abstract void doServlet(HttpServletRequest request, HttpServletResponse response);
 
     private void doBefore(HttpServletRequest request, HttpServletResponse response)
@@ -32,22 +41,43 @@ public abstract class CommonServlet extends HttpServlet {
 
     private void doAfter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            request.setAttribute("students", Student.findAll());
+            request.setAttribute("teachers", Teacher.findAll());
+            request.setAttribute("schoolYears", SchoolYear.findAll());
+            request.setAttribute("rooms", Room.findAll());
+            request.setAttribute("subjects", Subject.findAll());
+            ArrayList<model.Class> classes = model.Class.findAll();
+            for (model.Class clazz : classes) {
+                clazz.setTeacher(Teacher.find(clazz.getTeacher().getId()));
+                ArrayList<Student> students = new ArrayList<>();
+                for (Student student : clazz.getStudents()) {
+                    students.add(Student.find(student.getId()));
+                }
+                clazz.setStudents(students);
+            }
+            request.setAttribute("classes", classes);
+        } catch (Exception ex) {
+            request.setAttribute("errm", ex.getMessage());
+            logger.error(ex.getMessage());
+        }
+
         if (errm != null) {
             request.setAttribute("errorMessage", errm);
         }
         if (successm != null) {
             request.setAttribute("successMessage", successm);
         }
-        errm=null;
-        successm=null;
+        errm = null;
+        successm = null;
+
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
     }
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -63,8 +93,7 @@ public abstract class CommonServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -78,8 +107,7 @@ public abstract class CommonServlet extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response

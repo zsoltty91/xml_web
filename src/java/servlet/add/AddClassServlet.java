@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import model.SchoolYear;
 import model.Student;
 import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddClassServlet")
-public class AddClassServlet extends servlets.CommonServlet {
+public class AddClassServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

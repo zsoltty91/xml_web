@@ -9,13 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddTeacherServlet")
-public class AddTeacherServlet extends servlets.CommonServlet {
+public class AddTeacherServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

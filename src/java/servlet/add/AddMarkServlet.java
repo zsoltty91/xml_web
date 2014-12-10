@@ -10,16 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Mark;
 import model.SchoolYear;
-import model.Student;
 import model.Subject;
-import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddMarkServlet")
-public class AddMarkServlet extends servlets.CommonServlet {
+public class AddMarkServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

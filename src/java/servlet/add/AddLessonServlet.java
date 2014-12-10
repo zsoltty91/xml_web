@@ -5,7 +5,6 @@
  */
 package servlet.add;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,17 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import model.Days;
 import model.Lesson;
 import model.Room;
-import model.SchoolYear;
-import model.Student;
 import model.Subject;
 import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddLessonServlet")
-public class AddLessonServlet extends servlets.CommonServlet {
+public class AddLessonServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

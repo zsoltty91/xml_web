@@ -5,20 +5,18 @@
  */
 package servlet.add;
 
-import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.SchoolYear;
 import model.Student;
-import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
 @WebServlet(value = "/AddStudentToClassServlet")
-public class AddStudentToClassServlet extends servlets.CommonServlet {
+public class AddStudentToClassServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {

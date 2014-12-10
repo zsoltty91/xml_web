@@ -5,13 +5,11 @@
  */
 package servlet.remove;
 
-import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.SchoolYear;
 import model.Student;
-import model.Teacher;
+import servlet.CommonServlet;
 
 /**
  *
@@ -19,7 +17,7 @@ import model.Teacher;
  */
 
 @WebServlet(value = "/RemoveStudentServlet")
-public class RemoveStudentServlet extends servlets.CommonServlet {
+public class RemoveStudentServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
