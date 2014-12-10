@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -42,21 +43,31 @@ public class ListFilter implements Filter {
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-    }    
-    
-    private void doAfterProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {
         try {
             request.setAttribute("students", Student.findAll());
             request.setAttribute("teachers", Teacher.findAll());
             request.setAttribute("schoolYears", SchoolYear.findAll());
             request.setAttribute("rooms", Room.findAll());
             request.setAttribute("subjects", Subject.findAll());
-            request.setAttribute("classes", model.Class.findAll());
+            ArrayList<model.Class> classes = model.Class.findAll();
+            for (model.Class clazz : classes) {
+                clazz.setTeacher(Teacher.find(clazz.getTeacher().getId()));
+                ArrayList<Student> students = new ArrayList<>();
+                for (Student student : clazz.getStudents()) {
+                    students.add(Student.find(student.getId()));
+                }
+                clazz.setStudents(students);
+            }
+            request.setAttribute("classes", classes);
         } catch (Exception ex) {
             request.setAttribute("errm", ex.getMessage());
             logger.error(ex.getMessage());
         }
+    }    
+    
+    private void doAfterProcessing(ServletRequest request, ServletResponse response)
+            throws IOException, ServletException {
+        
         
     }
 
