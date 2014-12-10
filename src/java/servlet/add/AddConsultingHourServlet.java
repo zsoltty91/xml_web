@@ -27,7 +27,8 @@ public class AddConsultingHourServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "teacher.jsp?teacherId="+request.getParameter("tanar");
+        forward=false;
         String day = request.getParameter("nap");
         String ido = request.getParameter("ido");
         String tanar = request.getParameter("tanar");

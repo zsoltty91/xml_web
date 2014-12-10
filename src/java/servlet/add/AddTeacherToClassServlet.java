@@ -20,7 +20,8 @@ public class AddTeacherToClassServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "class.jsp?classId="+request.getParameter("osztaly");
+        forward=false;
         String osztaly = request.getParameter("osztaly");
         String tanar = request.getParameter("tanar");
 
@@ -29,9 +30,8 @@ public class AddTeacherToClassServlet extends CommonServlet {
             teacher.setId(tanar);
             try {
                 model.Class osztalyObj = model.Class.find(osztaly);
-                osztalyObj.remove();
-                osztalyObj.setTeacher(teacher);
-                osztalyObj.add();
+                osztalyObj.setTeacher(Teacher.find(tanar));
+                osztalyObj.updateTeacher();
                 successm = "Sikeresen hozzáadva!";
             } catch (Exception ex) {
                 errm = ex.getMessage();

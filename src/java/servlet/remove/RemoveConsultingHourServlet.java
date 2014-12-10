@@ -20,16 +20,19 @@ public class RemoveConsultingHourServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "teacher.jsp?teacherId="+request.getParameter("tanar");
+        forward=false;
         String id = request.getParameter("id");
 
         if (!(id.isEmpty())) {
             ConsultingHour consult = new ConsultingHour();
+            consult.setId(id);
             try {
                 consult.remove();
                 successm = "Sikeresen törölve!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
+                logger.error(ex.getMessage());
             }
         }
 

@@ -19,13 +19,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.xml.bind.JAXBException;
-import model.Teacher;
+import model.SchoolYear;
 
 /**
  *
- * @author zsolti
+ * @author Rendszergazda
  */
-public class TeacherFilter implements Filter {
+public class SchoolYearFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -34,45 +34,32 @@ public class TeacherFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public TeacherFilter() {
+    public SchoolYearFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-          
-        String id = request.getParameter("teacherId");
+        if (debug) {
+            log("SchoolYearFilter:DoBeforeProcessing");
+        }
+
+	String id = request.getParameter("schoolYearId");
+        SchoolYear sy = new SchoolYear();
         try {
-            Teacher teacher = Teacher.find(id);
-            request.setAttribute("teacher", teacher);
-            Logger.getLogger("ds").info(teacher.toString());
+            sy = SchoolYear.find(id);
+            request.setAttribute("schoolYear", sy);
         } catch (JAXBException ex) {
-            Logger.getLogger(TeacherFilter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SchoolYearFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("TeacherFilter:DoAfterProcessing");
+            log("SchoolYearFilter:DoAfterProcessing");
         }
 
-	// Write code here to process the request and/or response after
-        // the rest of the filter chain is invoked.
-	// For example, a logging filter might log the attributes on the
-        // request object after the request has been processed. 
-	/*
-         for (Enumeration en = request.getAttributeNames(); en.hasMoreElements(); ) {
-         String name = (String)en.nextElement();
-         Object value = request.getAttribute(name);
-         log("attribute: " + name + "=" + value.toString());
-
-         }
-         */
-	// For example, a filter might append something to the response.
-	/*
-         PrintWriter respOut = new PrintWriter(response.getWriter());
-         respOut.println("<P><B>This has been appended by an intrusive filter.</B>");
-         */
+	
     }
 
     /**
@@ -89,7 +76,7 @@ public class TeacherFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("TeacherFilter:doFilter()");
+            log("SchoolYearFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -149,7 +136,7 @@ public class TeacherFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("TeacherFilter:Initializing filter");
+                log("SchoolYearFilter:Initializing filter");
             }
         }
     }
@@ -160,9 +147,9 @@ public class TeacherFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("TeacherFilter()");
+            return ("SchoolYearFilter()");
         }
-        StringBuffer sb = new StringBuffer("TeacherFilter(");
+        StringBuffer sb = new StringBuffer("SchoolYearFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

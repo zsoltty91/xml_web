@@ -128,6 +128,10 @@ public class Class implements XmlID {
     public void add() throws JAXBException, IOException {
         new ClassDAO(this).add();
     }
+    
+    public void updateTeacher() throws JAXBException, IOException {
+        new ClassDAO(this).updateTeacher();
+    }
 
     public void remove() throws IOException {
         new ClassDAO(this).remove();

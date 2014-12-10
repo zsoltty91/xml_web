@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
@@ -19,13 +20,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.xml.bind.JAXBException;
+import model.Lesson;
+import model.Room;
+import model.SchoolYear;
+import model.Student;
+import model.Subject;
 import model.Teacher;
 
 /**
  *
- * @author zsolti
+ * @author Rendszergazda
  */
-public class TeacherFilter implements Filter {
+public class ClassFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -34,45 +40,45 @@ public class TeacherFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public TeacherFilter() {
+    public ClassFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-          
-        String id = request.getParameter("teacherId");
+        if (debug) {
+            log("SchoolYearFilter:DoBeforeProcessing");
+        }
+
+	String id = request.getParameter("classId");
+        model.Class cl;
         try {
-            Teacher teacher = Teacher.find(id);
-            request.setAttribute("teacher", teacher);
-            Logger.getLogger("ds").info(teacher.toString());
+            cl = model.Class.find(id);
+            cl.setTeacher(Teacher.find(cl.getTeacher().getId()));
+            ArrayList<Student> diakok = new ArrayList<>();
+            for(Student diak: cl.getStudents()) {
+            diakok.add(Student.find(diak.getId()));
+            }
+            cl.setStudents(diakok);
+            for(Lesson ora : cl.getLessons()) {
+            ora.setSubject(Subject.find(ora.getSubject().getId()));
+            ora.setTeacher(Teacher.find(ora.getTeacher().getId()));
+            }
+            request.setAttribute("class", cl);
+            request.setAttribute("teachers", Teacher.findAll());
+            request.setAttribute("subjects", Subject.findAll());
+            request.setAttribute("rooms", Room.findAll());
         } catch (JAXBException ex) {
-            Logger.getLogger(TeacherFilter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClassFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("TeacherFilter:DoAfterProcessing");
+            log("SchoolYearFilter:DoAfterProcessing");
         }
 
-	// Write code here to process the request and/or response after
-        // the rest of the filter chain is invoked.
-	// For example, a logging filter might log the attributes on the
-        // request object after the request has been processed. 
-	/*
-         for (Enumeration en = request.getAttributeNames(); en.hasMoreElements(); ) {
-         String name = (String)en.nextElement();
-         Object value = request.getAttribute(name);
-         log("attribute: " + name + "=" + value.toString());
-
-         }
-         */
-	// For example, a filter might append something to the response.
-	/*
-         PrintWriter respOut = new PrintWriter(response.getWriter());
-         respOut.println("<P><B>This has been appended by an intrusive filter.</B>");
-         */
+	
     }
 
     /**
@@ -89,7 +95,7 @@ public class TeacherFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("TeacherFilter:doFilter()");
+            log("SchoolYearFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -149,7 +155,7 @@ public class TeacherFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("TeacherFilter:Initializing filter");
+                log("SchoolYearFilter:Initializing filter");
             }
         }
     }
@@ -160,9 +166,9 @@ public class TeacherFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("TeacherFilter()");
+            return ("SchoolYearFilter()");
         }
-        StringBuffer sb = new StringBuffer("TeacherFilter(");
+        StringBuffer sb = new StringBuffer("SchoolYearFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

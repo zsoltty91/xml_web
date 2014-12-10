@@ -12,9 +12,33 @@
         <filter-name>TeacherFilter</filter-name>
         <url-pattern>/teacher.jsp</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>SchoolYearFilter</filter-name>
+        <filter-class>servlet.SchoolYearFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SchoolYearFilter</filter-name>
+        <url-pattern>/schoolyear.jsp</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>StudentFilter</filter-name>
+        <filter-class>servlet.StudentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>StudentFilter</filter-name>
+        <url-pattern>/student.jsp</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>ClassFilter</filter-name>
+        <filter-class>servlet.ClassFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ClassFilter</filter-name>
+        <url-pattern>/class.jsp</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>ListFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/index.jsp</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Log4j</servlet-name>

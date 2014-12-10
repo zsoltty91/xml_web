@@ -20,7 +20,8 @@ public class RemoveHolidayServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "schoolyear.jsp?schoolYearId="+request.getParameter("tanev");
+        forward=false;
         String id = request.getParameter("id");
 
         if (!(id.isEmpty())) {

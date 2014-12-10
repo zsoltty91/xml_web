@@ -117,143 +117,10 @@
         </table>      
     </fieldset>
 </form>
-<form class="left" action="<c:url value="AddConsultingHourServlet"/>" method="post" >
-    <fieldset>
-        <legend>Fogadóóra hozzáadása</legend>
-        <table align="center">
-            <tr>
-                <td>Tanár:</td>
-                <td>
-                    <select name="tanar">
-                        <c_rt:forEach var="tanar" items="${teachers}">
-                            <option value="${tanar.id}">${tanar.name}</option>
-                        </c_rt:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Nap:</td>
-                <td>
-                    <select name="nap">
-                        <option value="HÉTFŐ">hétfő</option>
-                        <option value="KEDD">kedd</option>
-                        <option value="SZERDA">szerda</option>
-                        <option value="CSÜTÖRTÖK">csütörtök</option>
-                        <option value="PÉNTEK">péntek</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Idő:</td>
-                <td>
-                    <input type="text" name="ido"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center" >
-                    <input type="submit" value="Létrehozás" />
-                </td>
-            </tr>
-        </table>      
-    </fieldset>
-</form>
 
-<form class="left" action="<c:url value="AddHolidayServlet"/>" method="post" >
-    <fieldset>
-        <legend>Szünet hozzáadása</legend>
-        <table align="center">
-            <tr>
-                <td>Név:</td>
-                <td>
-                    <input type="text" name="nev"/>
-                </td>
-            </tr>
-            <tr>
-                <td>Tanév:</td>
-                <td>
-                    <select name="tanev">
-                        <c_rt:forEach var="tanev" items="${schoolYears}">
-                            <option value="${tanev.id}">${tanev.id}</option>
-                        </c_rt:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Mettől:</td>
-                <td>
-                    <input type="text" name="mettol"/>
-                </td>
-            </tr>
-            <tr>
-                <td>Meddig:</td>
-                <td>
-                    <input type="text" name="meddig"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center" >
-                    <input type="submit" value="Létrehozás" />
-                </td>
-            </tr>
-        </table>      
-    </fieldset>
-</form>    
+    
 
-<form class="left" action="<c:url value="AddMarkServlet"/>" method="post" >
-    <fieldset>
-        <legend>Jegy beírása</legend>
-        <table align="center">
-            <tr>
-                <td>Diák</td>
-                <td>
-                    <select name="diak">
-                        <c_rt:forEach var="student" items="${students}">
-                            <option value="${student.id}">${student.name}</option>
-                        </c_rt:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Tanév:</td>
-                <td>
-                    <select name="tanev">
-                        <c_rt:forEach var="tanev" items="${schoolYears}">
-                            <option value="${tanev.id}">${tanev.id}</option>
-                        </c_rt:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Tantárgy:</td>
-                <td>
-                    <select name="tantargy">
-                        <c_rt:forEach var="subject" items="${subjects}">
-                            <option value="${subject.id}">${subject.name}</option>
-                        </c_rt:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Jegy:</td>
-                <td>
-                    <select name="jegy">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center" >
-                    <input type="submit" value="Létrehozás" />
-                </td>
-            </tr>
-        </table>      
-    </fieldset>
-</form>        
+        
 
 Students
 <table>
@@ -273,6 +140,9 @@ Students
                     <input type="hidden" name="id" value="${student.id}"/>
                     <input type="submit" value="Delete"/>
                 </form>
+            </td>
+            <td>
+                <a href="student.jsp?studentId=${student.id}">Info</a>
             </td>
         </tr>
     </c_rt:forEach>
@@ -296,6 +166,9 @@ Teachers
                     <input type="hidden" name="id" value="${teacher.id}"/>
                     <input type="submit" value="Delete"/>
                 </form>
+            </td>
+            <td>
+                <a href="teacher.jsp?teacherId=${teacher.id}">Info</a>
             </td>
         </tr>
     </c_rt:forEach>
@@ -369,6 +242,9 @@ Schoolyears
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
+            <td>
+                <a href="schoolyear.jsp?schoolYearId=${schoolYear.id}">Info</a>
+            </td>
         </tr>
     </c_rt:forEach>
 </tbody>
@@ -394,6 +270,9 @@ Classes
                     <input type="hidden" name="id" value="${class.id}"/>
                     <input type="submit" value="Delete"/>
                 </form>
+            </td>
+            <td>
+                <a href="class.jsp?classId=${class.id}">Info</a>
             </td>
         </tr>
     </c_rt:forEach>

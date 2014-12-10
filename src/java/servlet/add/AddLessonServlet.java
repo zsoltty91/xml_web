@@ -25,7 +25,9 @@ public class AddLessonServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+       url = "class.jsp?classId="+request.getParameter("osztaly");
+        forward=false;
+        
         String nap = request.getParameter("nap");
         String osztaly = request.getParameter("osztaly");
         String ido = request.getParameter("ido");

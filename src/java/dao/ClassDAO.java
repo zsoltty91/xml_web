@@ -46,6 +46,14 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         object.setId(sb.toString());
     }
     
+    public void updateTeacher() throws JAXBException, IOException {
+        try {
+            executeQuery("replace value of node doc('rendszer')/rendszer/osztalyok/osztaly[@id='"+object.getId()+"']/osztalyfonok with '" + object.getTeacher().getId()+"'");
+        } finally {
+            closeConnection();
+        }
+    }
+    
     public void add() throws JAXBException, IOException {
         generateId();
         try {

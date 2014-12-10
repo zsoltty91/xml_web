@@ -21,7 +21,8 @@ public class AddHolidayServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "schoolyear.jsp?schoolYearId="+request.getParameter("tanev");
+        forward=false;
         String nev = request.getParameter("nev");
         String tanev = request.getParameter("tanev");
         String mettol = request.getParameter("mettol");

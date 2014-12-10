@@ -20,7 +20,7 @@ public class RemoveMarkServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "student.jsp?studentId="+request.getParameter("diak");
         String id = request.getParameter("id");
 
         if (!(id.isEmpty())) {

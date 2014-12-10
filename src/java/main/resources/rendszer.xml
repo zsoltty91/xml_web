@@ -86,17 +86,17 @@
             <email>szabolcs.remenyi@gmail.com</email>
             <jegyei>
                 <jegy id="1">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>3</erdemjegy>
                 </jegy>
                 <jegy id="2">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>2</erdemjegy>
                 </jegy>
                 <jegy id="3">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>5</erdemjegy>
                 </jegy>
@@ -107,12 +107,12 @@
             <email>zsoltty91@hotmail.com</email>
             <jegyei>
                 <jegy id="1">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>5</erdemjegy>
                 </jegy>
                 <jegy id="2">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>4</erdemjegy>
                 </jegy>
@@ -123,12 +123,12 @@
             <email>adam.horvath@gmail.com</email>
             <jegyei>
                 <jegy id="1">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>1</erdemjegy>
                 </jegy>
                 <jegy id="2">
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanev>2014/2015</tanev>
                     <erdemjegy>3</erdemjegy>
                 </jegy>
@@ -244,14 +244,14 @@
                 <ora id="1">
                     <nap>hétfő</nap>
                     <idopont>10:00:00</idopont>
-                    <tantargy>K004</tantargy>
+                    <tantargy>4</tantargy>
                     <tanar>1</tanar>
                     <terem>202</terem>
                 </ora>
                 <ora id="2">
                     <nap>hétfő</nap>
                     <idopont>10:00:00</idopont>
-                    <tantargy>K002</tantargy>
+                    <tantargy>2</tantargy>
                     <tanar>2</tanar>
                     <terem>201</terem>
                 </ora>
@@ -266,14 +266,14 @@
                 <ora id="1">
                     <nap>hétfő</nap>
                     <idopont>10:00:00</idopont>
-                    <tantargy>K004</tantargy>
+                    <tantargy>4</tantargy>
                     <tanar>1</tanar>
                     <terem>202</terem>
                 </ora>
                 <ora id="2">
                     <nap>hétfő</nap>
                     <idopont>10:00:00</idopont>
-                    <tantargy>K002</tantargy>
+                    <tantargy>2</tantargy>
                     <tanar>2</tanar>
                     <terem>201</terem>
                 </ora>
@@ -291,14 +291,14 @@
                 <ora id="1">
                     <nap>hétfő</nap>
                     <idopont>08:00:00</idopont>
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanar>1</tanar>
                     <terem>202</terem>
                 </ora>
                 <ora id="2">
                     <nap>hétfő</nap>
                     <idopont>12:00:00</idopont>
-                    <tantargy>K003</tantargy>
+                    <tantargy>3</tantargy>
                     <tanar>2</tanar>
                     <terem>201</terem>
                 </ora>
@@ -318,14 +318,14 @@
                 <ora id="1">
                     <nap>hétfő</nap>
                     <idopont>08:00:00</idopont>
-                    <tantargy>K001</tantargy>
+                    <tantargy>1</tantargy>
                     <tanar>1</tanar>
                     <terem>202</terem>
                 </ora>
                 <ora id="2">
                     <nap>hétfő</nap>
                     <idopont>12:00:00</idopont>
-                    <tantargy>K003</tantargy>
+                    <tantargy>3</tantargy>
                     <tanar>2</tanar>
                     <terem>201</terem>
                 </ora>

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
@@ -19,37 +19,46 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.xml.bind.JAXBException;
+import model.Mark;
+import model.SchoolYear;
+import model.Student;
+import model.Subject;
 import model.Teacher;
 
 /**
  *
  * @author zsolti
  */
-public class TeacherFilter implements Filter {
-    
+public class StudentFilter implements Filter {
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
-    public TeacherFilter() {
-    }    
-    
+
+    public StudentFilter() {
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-          
-        String id = request.getParameter("teacherId");
+
+        String id = request.getParameter("studentId");
         try {
-            Teacher teacher = Teacher.find(id);
-            request.setAttribute("teacher", teacher);
-            Logger.getLogger("ds").info(teacher.toString());
+            Student student = Student.find(id);
+            for (Mark mark : student.getMarks()) {
+                mark.setSubject(Subject.find(mark.getSubject().getId()));
+            }
+            Logger.getLogger("dsdf").warning(student.getMarks().get(0).getSubject().getId());
+            request.setAttribute("student", student);
+            request.setAttribute("subjects", Subject.findAll());
+            request.setAttribute("schoolYears", SchoolYear.findAll());
         } catch (JAXBException ex) {
-            Logger.getLogger(TeacherFilter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -58,7 +67,7 @@ public class TeacherFilter implements Filter {
 
 	// Write code here to process the request and/or response after
         // the rest of the filter chain is invoked.
-	// For example, a logging filter might log the attributes on the
+        // For example, a logging filter might log the attributes on the
         // request object after the request has been processed. 
 	/*
          for (Enumeration en = request.getAttributeNames(); en.hasMoreElements(); ) {
@@ -68,7 +77,7 @@ public class TeacherFilter implements Filter {
 
          }
          */
-	// For example, a filter might append something to the response.
+        // For example, a filter might append something to the response.
 	/*
          PrintWriter respOut = new PrintWriter(response.getWriter());
          respOut.println("<P><B>This has been appended by an intrusive filter.</B>");
@@ -87,27 +96,27 @@ public class TeacherFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("TeacherFilter:doFilter()");
         }
-        
+
         doBeforeProcessing(request, response);
-        
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
-	    // If an exception is thrown somewhere down the filter chain,
+            // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(request, response);
 
-	// If there was a problem, we want to rethrow it if it is
+        // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.
         if (problem != null) {
             if (problem instanceof ServletException) {
@@ -139,16 +148,16 @@ public class TeacherFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("TeacherFilter:Initializing filter");
             }
         }
@@ -167,20 +176,20 @@ public class TeacherFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -197,7 +206,7 @@ public class TeacherFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -211,9 +220,9 @@ public class TeacherFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

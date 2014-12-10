@@ -23,22 +23,23 @@ import org.apache.log4j.Logger;
  * @author zsolti
  */
 public abstract class CommonServlet extends HttpServlet {
-
+    
     public String errm = null;
     public String successm = null;
     public String url = null;
-
-    Logger logger = Logger.getLogger(CommonServlet.class);
+    public boolean forward = false;
+    
+    protected Logger logger = Logger.getLogger(CommonServlet.class);
     
     public abstract void doServlet(HttpServletRequest request, HttpServletResponse response);
-
+    
     private void doBefore(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         request.removeAttribute("successMessage");
         request.removeAttribute("errorMessage");
     }
-
+    
     private void doAfter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -61,7 +62,7 @@ public abstract class CommonServlet extends HttpServlet {
             request.setAttribute("errm", ex.getMessage());
             logger.error(ex.getMessage());
         }
-
+        
         if (errm != null) {
             request.setAttribute("errorMessage", errm);
         }
@@ -70,9 +71,13 @@ public abstract class CommonServlet extends HttpServlet {
         }
         errm = null;
         successm = null;
-
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        
+        if (forward) {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect(url);
+        }
     }
 
     /**

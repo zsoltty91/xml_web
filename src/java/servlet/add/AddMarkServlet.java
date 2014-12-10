@@ -22,7 +22,8 @@ public class AddMarkServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "student.jsp?studentId="+request.getParameter("diak");
+        forward=false;
         String targy = request.getParameter("tantargy");
         String tanev = request.getParameter("tanev");
         String jegy = request.getParameter("jegy");

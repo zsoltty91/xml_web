@@ -20,7 +20,9 @@ public class RemoveStudentFromClassServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
-        url = "index.jsp";
+        url = "class.jsp?classId="+request.getParameter("classId");
+        forward=false;
+        
         String studentId = request.getParameter("studentId");
         String classId = request.getParameter("classId");
 
