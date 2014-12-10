@@ -130,7 +130,13 @@
             <tr>
                 <td>Nap:</td>
                 <td>
-                    <input type="text" name="nap"/>
+                    <select name="tanar">
+                        <option value="hétfő">hétfő</option>
+                        <option value="kedd">kedd</option>
+                        <option value="szerda">szerda</option>
+                        <option value="csütörötk">csütörtök</option>
+                        <option value="péntek">péntek</option>
+                    </select>
                 </td>
             </tr>
             <tr>
