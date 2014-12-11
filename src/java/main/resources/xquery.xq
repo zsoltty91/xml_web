@@ -14,6 +14,7 @@ declare function inf:aktivOsztalyok() as node()* {
   return $osztalyok  
 };
 
+
 (: Az adott évben az iskolába járó diákok listája, név szerint növekvő sorrendben :)
 declare function inf:diakok($tanev as xs:string) as node()* {
   for $i in doc('rendszer')//rendszer/osztalyok/osztaly
@@ -64,6 +65,11 @@ declare function inf:tanevekId-descending() as xs:token* {
   return $tanevek
 };
 
+declare function inf:aktualisTanev() as xs:token {
+   let $aktualisTanev := inf:tanevekId-descending()[1]
+   return $aktualisTanev
+};
+
 (: Jelenleg is az iskolába járó diákok listája, az utolsó tanév alapján :)
 declare function inf:aktivDiakok() as node()* {
   let $aktualisTanev := inf:tanevekId-descending()[1]
@@ -94,6 +100,34 @@ declare function inf:osztalyfonokok($tanev as xs:string) as node()* {
   let $ofok-listaja := doc('rendszer')//osztalyok/osztaly/osztalyfonok[../tanev=$tanev]
   for $i in doc('rendszer')//rendszer/tanarok/tanar
   where inf:is-value-in-sequence(data($i/@id), data($ofok-listaja))
+  return $i
+};
+
+declare function inf:osztalyfonokok() as node()* {
+  let $ofok-listaja := doc('rendszer')//osztalyok/osztaly/osztalyfonok[../tanev=inf:aktualisTanev()]
+  for $i in doc('rendszer')//rendszer/tanarok/tanar
+  where inf:is-value-in-sequence(data($i/@id), data($ofok-listaja))
+  return $i
+};
+
+declare function inf:osztalyhoz-nem-rendelt-diakok() as node()* {
+  let $diakok-listaja := doc('rendszer')//osztalyok/osztaly/diakok/diak[../../tanev=inf:aktualisTanev()]
+  for $i in doc('rendszer')//rendszer/diakok/diak
+  where fn:not(inf:is-value-in-sequence(data($i/@id), data($diakok-listaja)))
+  return $i   
+};
+
+declare function inf:nem-osztalyfonokok($tanev as xs:string) as node()* {
+  let $ofok-listaja := doc('rendszer')//osztalyok/osztaly/osztalyfonok[../tanev=$tanev]
+  for $i in doc('rendszer')//rendszer/tanarok/tanar
+  where fn:not(inf:is-value-in-sequence(data($i/@id), data($ofok-listaja)))
+  return $i
+};
+
+declare function inf:nem-osztalyfonokok() as node()* {
+  let $ofok-listaja := doc('rendszer')//osztalyok/osztaly/osztalyfonok[../tanev=inf:aktualisTanev()]
+  for $i in doc('rendszer')//rendszer/tanarok/tanar
+  where fn:not(inf:is-value-in-sequence(data($i/@id), data($ofok-listaja)))
   return $i
 };
 
