@@ -117,6 +117,13 @@ declare function inf:osztalyhoz-nem-rendelt-diakok() as node()* {
   return $i   
 };
 
+declare function inf:osztalyhoz-nem-rendelt-diakok($tanev as xs:string) as node()* {
+  let $diakok-listaja := doc('rendszer')//osztalyok/osztaly/diakok/diak[../../tanev=$tanev]
+  for $i in doc('rendszer')//rendszer/diakok/diak
+  where fn:not(inf:is-value-in-sequence(data($i/@id), data($diakok-listaja)))
+  return $i   
+};
+
 declare function inf:nem-osztalyfonokok($tanev as xs:string) as node()* {
   let $ofok-listaja := doc('rendszer')//osztalyok/osztaly/osztalyfonok[../tanev=$tanev]
   for $i in doc('rendszer')//rendszer/tanarok/tanar

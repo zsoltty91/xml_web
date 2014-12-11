@@ -63,4 +63,12 @@ public class StudentDAO extends DefaultDAO<Student>{
             closeConnection();
         }
     }
+    
+    public ArrayList<Student> findWithoutClass(String tanev) throws IOException, JAXBException {
+        try {
+            return getObjectsByQuery("inf:osztalyhoz-nem-rendelt-diakok('"+tanev+"')");            
+        } finally {
+            closeConnection();
+        }
+    }
 }

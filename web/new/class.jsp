@@ -140,29 +140,31 @@
         </div>
     </div>
 
-    <form class="left" action="<c:url value="AddStudentToClassServlet"/>" method="post" >
-        <fieldset>
-            <legend>Diák hozzáadása</legend>
-            <table align="center">
-                <tr>
-                    <td>Diákok:</td>
-                    <td>
-                        <select name="id">
-                            <c_rt:forEach var="diak" items="${students}">
-                                <option value="${diak.id}" selected>${diak.name}</option>
-                            </c_rt:forEach>          
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center" >
-                        <input type="hidden" name="classId" value="${class.id}"/>
-                        <input type="submit" value="Hozzáadás" />
-                    </td>
-                </tr>
-            </table>      
-        </fieldset>
-    </form>  
+    <div class="pin">
+        <div class="header">Diák hozzáadása</div>
+        <div class="content">
+            <form class="left" action="<c:url value="AddStudentToClassServlet"/>" method="post" >                
+                <table align="center">
+                    <tr>
+                        <td>Diákok:</td>
+                        <td>
+                            <select name="id" class="chzn-choices" style="width: 12em;">
+                                <c_rt:forEach var="diak" items="${students}">
+                                    <option value="${diak.id}" selected>${diak.name}</option>
+                                </c_rt:forEach>          
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center" >
+                            <input type="hidden" name="classId" value="${class.id}"/>
+                            <input type="submit" value="Hozzáadás" />
+                        </td>
+                    </tr>
+                </table>                      
+            </form>  
+        </div>
+    </div>
 
     <div class="pin">
         <div class="header">Óra hozzáadása</div>

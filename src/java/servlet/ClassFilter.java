@@ -6,6 +6,7 @@
 
 package servlet;
 
+import dao.StudentDAO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -53,6 +54,10 @@ public class ClassFilter implements Filter {
         model.Class cl;
         try {
             cl = model.Class.find(id);
+            
+            SchoolYear sy = SchoolYear.find(cl.getSchoolYear().getId());
+            String tanev = sy.getFrom().getYear() + "/" + sy.getTo().getYear();               
+                    
             cl.setTeacher(Teacher.find(cl.getTeacher().getId()));
             ArrayList<Student> diakok = new ArrayList<>();
             for(Student diak: cl.getStudents()) {
@@ -67,7 +72,7 @@ public class ClassFilter implements Filter {
             request.setAttribute("teachers", Teacher.findAll());
             request.setAttribute("subjects", Subject.findAll());
             request.setAttribute("rooms", Room.findAll());
-            request.setAttribute("students", Student.findAll());
+            request.setAttribute("students", new StudentDAO().findWithoutClass(tanev));            
         } catch (JAXBException ex) {
             Logger.getLogger(ClassFilter.class.getName()).log(Level.SEVERE, null, ex);
         }

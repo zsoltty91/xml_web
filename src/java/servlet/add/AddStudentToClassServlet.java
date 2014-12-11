@@ -25,7 +25,7 @@ public class AddStudentToClassServlet extends CommonServlet {
         forward = false;
         String osztaly = request.getParameter("classId");
         String tanulo = request.getParameter("id");
-logger.warn(osztaly+" "+tanulo);
+    logger.warn(osztaly+" "+tanulo);
         if (!(osztaly.isEmpty() || tanulo.isEmpty())) {
             Student student = new Student();
             student.setId(tanulo);

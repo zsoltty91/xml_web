@@ -63,6 +63,6 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         } finally {
             closeConnection();
         }
-    }
+    }        
     
 }
