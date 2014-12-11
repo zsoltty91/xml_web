@@ -5,27 +5,23 @@
  */
 package servlet.add;
 
-import java.time.LocalDate;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Holiday;
 import model.Room;
-import model.SchoolYear;
-import model.Student;
 import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddRoomServlet")
+@WebServlet(value = "/new/AddRoomServlet")
 public class AddRoomServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
         url = "index.jsp";
-        String szam = request.getParameter("szam");
+        String szam = request.getParameter("nev");
         String labor = request.getParameter("labor");
         String projektor = request.getParameter("projektor");
         String ferohely = request.getParameter("ferohely");

@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -126,6 +127,7 @@ public class Class implements XmlID {
     }
 
     public void add() throws JAXBException, IOException {
+        Logger.getLogger("Class.java").warn(this.toString());
         new ClassDAO(this).add();
     }
     

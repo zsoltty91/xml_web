@@ -16,7 +16,7 @@ import servlet.CommonServlet;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddHolidayServlet")
+@WebServlet(value = "/new/AddHolidayServlet")
 public class AddHolidayServlet extends CommonServlet {
 
     @Override

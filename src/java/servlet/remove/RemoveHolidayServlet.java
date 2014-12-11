@@ -15,7 +15,7 @@ import servlet.CommonServlet;
  *
  * @author zsolti
  */
-@WebServlet(value = "/RemoveHolidayServlet")
+@WebServlet(value = "/new/RemoveHolidayServlet")
 public class RemoveHolidayServlet extends CommonServlet {
 
     @Override

@@ -67,6 +67,7 @@ public class ClassFilter implements Filter {
             request.setAttribute("teachers", Teacher.findAll());
             request.setAttribute("subjects", Subject.findAll());
             request.setAttribute("rooms", Room.findAll());
+            request.setAttribute("students", Student.findAll());
         } catch (JAXBException ex) {
             Logger.getLogger(ClassFilter.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -52,6 +52,30 @@ Class
         </table>      
     </fieldset>
 </form>
+<form class="left" action="<c:url value="AddStudentToClassServlet"/>" method="post" >
+    <fieldset>
+        <legend>Diák hozzáadása</legend>
+        <table align="center">
+            <tr>
+                <td>Diákok:</td>
+                <td>
+                    <select name="id">
+                        <c_rt:forEach var="diak" items="${students}">
+                            <option value="${diak.id}" selected>${diak.name}</option>
+                        </c_rt:forEach>          
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" >
+                    <input type="hidden" name="classId" value="${class.id}"/>
+                    <input type="submit" value="Hozzáadás" />
+                </td>
+            </tr>
+        </table>      
+    </fieldset>
+</form>  
+
 <form class="right" action="<c:url value="AddLessonServlet"/>" method="post" >
     <fieldset>
         <legend>Óra hozzáadása</legend>

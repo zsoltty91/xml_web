@@ -11,18 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ConsultingHour;
 import model.Days;
-import model.Mark;
-import model.SchoolYear;
-import model.Student;
-import model.Subject;
-import model.Teacher;
 import servlet.CommonServlet;
 
 /**
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddConsultingHourServlet")
+@WebServlet(value = "/new/AddConsultingHourServlet")
 public class AddConsultingHourServlet extends CommonServlet {
 
     @Override

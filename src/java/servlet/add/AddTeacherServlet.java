@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Student;
 import model.Teacher;
 import servlet.CommonServlet;
 
@@ -17,7 +16,7 @@ import servlet.CommonServlet;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddTeacherServlet")
+@WebServlet(value = "/new/AddTeacherServlet")
 public class AddTeacherServlet extends CommonServlet {
 
     @Override

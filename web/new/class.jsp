@@ -147,7 +147,7 @@
                 <tr>
                     <td>Diákok:</td>
                     <td>
-                        <select name="diak">
+                        <select name="id">
                             <c_rt:forEach var="diak" items="${students}">
                                 <option value="${diak.id}" selected>${diak.name}</option>
                             </c_rt:forEach>          
@@ -156,7 +156,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center" >
-                        <input type="hidden" name="osztaly" value="${class.id}"/>
+                        <input type="hidden" name="classId" value="${class.id}"/>
                         <input type="submit" value="Hozzáadás" />
                     </td>
                 </tr>

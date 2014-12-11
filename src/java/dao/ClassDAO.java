@@ -41,6 +41,7 @@ public class ClassDAO extends DefaultDAO<model.Class> {
 
     public void generateId() {
         StringBuilder sb = new StringBuilder();
+        logger.warn("genereateidelott");
         sb.append(this.object.getName()).append("-").append(this.object.getSchoolYear().getFrom().getYear()).append("/").append(this.object.getSchoolYear().getTo().getYear());
         logger.info(sb);
         object.setId(sb.toString());

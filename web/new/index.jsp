@@ -323,4 +323,74 @@
             </form>
         </div>
     </div>
+    <div class="pin">
+        <div class="header">Tanév létrehozása</div>
+        <div class="content">
+            <form class="right" action="<c:url value="AddSchoolYearServlet"/>" method="post" >
+                <table align="center">
+                    <tr>
+                        <td>Mettől:</td>
+                        <td>
+                            <input type="text" name="mettol"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Meddig:</td>
+                        <td>
+                            <input type="text" name="meddig"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center" >
+                            <input type="submit" value="Létrehozás" />
+                        </td>
+                    </tr>
+                </table>      
+            </form>
+        </div>
+    </div>
+                <div class="pin">
+        <div class="header">Terem létrehozása</div>
+        <div class="content">
+            <form class="right" action="<c:url value="AddRoomServlet"/>" method="post" >
+                <table align="center">
+                    <tr>
+                        <td>Név:</td>
+                        <td>
+                            <input type="text" name="nev"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Labor:</td>
+                        <td>
+                            <select name="labor" class="chzn-choices" style="width: 12em;">                             
+                                    <option value="true" selected>Igen</option>
+                                    <option value="false">Nem</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Projektor:</td>
+                        <td>
+                            <select name="projektor" class="chzn-choices" style="width: 12em;">                             
+                                    <option value="true" selected>Van</option>
+                                    <option value="false">Nincs</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Férőhely:</td>
+                        <td>
+                            <input type="number" name="ferohely"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center" >
+                            <input type="submit" value="Létrehozás" />
+                        </td>
+                    </tr>
+                </table>      
+            </form>
+        </div>
+    </div>
 </div>
