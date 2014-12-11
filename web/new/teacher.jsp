@@ -56,7 +56,10 @@
                                 <form method="post" action="RemoveConsultingHourServlet">
                                     <input type="hidden" name="id" value="${fogadoora.id}"/>
                                     <input type="hidden" name="tanar" value="${teacher.id}"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
+                                    <!--
                                     <input type="submit" value="Delete"/>
+                                    -->
                                 </form>
                             </td>
                         </tr>

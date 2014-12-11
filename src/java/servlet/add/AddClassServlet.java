@@ -20,7 +20,7 @@ import servlet.CommonServlet;
  *
  * @author zsolti
  */
-@WebServlet(value = "/AddClassServlet")
+@WebServlet(value = "/new/AddClassServlet")
 public class AddClassServlet extends CommonServlet {
 
     @Override

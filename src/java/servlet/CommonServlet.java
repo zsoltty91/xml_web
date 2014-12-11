@@ -59,7 +59,7 @@ public abstract class CommonServlet extends HttpServlet {
             }
             request.setAttribute("classes", classes);
         } catch (Exception ex) {
-            request.setAttribute("errm", ex.getMessage());
+            request.setAttribute("errorMessage", ex.getMessage());
             logger.error(ex.getMessage());
         }
         

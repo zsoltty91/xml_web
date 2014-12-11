@@ -135,7 +135,7 @@
             <table id="infoBar">
                 <tr>
                     <td>                        
-                        <form method="post" action="main.jsp" style="float: left; padding: 10px 5px 4px 5px; background: #ccc; margin: -10px 0 -5px 5px;">                
+                        <form method="post" action="index.jsp" style="float: left; padding: 10px 5px 4px 5px; background: #ccc; margin: -10px 0 -5px 5px;">                
                             <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/home.png" style="vertical-align: middle;"/></a>
                         </form>                                                                          
                     </td>
@@ -149,14 +149,14 @@
             <div id="header">
                 <div class="content">    
                     <ul>
-                        <li class="headerLi"><a href="main.jsp">Fejlett adatbázis-rendszerek</a></li>                                               
+                        <li class="headerLi"><a href="index.jsp">Fejlett adatbázis-rendszerek</a></li>                                               
                     </ul>                
                 </div>                 
             </div>        
             <div id="subHeader">
                 <div class="content">
                     <ul class="subHeaderUl">                        
-                        <li><a href="password.jsp">Tanulmányi Rendszer</a></li>
+                        <li><a href="index.jsp">Tanulmányi Rendszer</a></li>
                     </ul>
                     <ul class="subHeaderUl" style="display: none;">
                         <li><a href="password.jsp">Jelszóváltoztatás</a></li>

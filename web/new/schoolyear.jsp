@@ -62,7 +62,7 @@
                                 <form method="post" action="RemoveHolidayServlet">
                                     <input type="hidden" name="id" value="${holiday.id}"/>
                                     <input type="hidden" name="tanev" value="${schoolYear.id}"/>
-                                    <input type="submit" value="Delete"/>                    
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>                  
                                 </form>
                             </td>
                         </tr>    

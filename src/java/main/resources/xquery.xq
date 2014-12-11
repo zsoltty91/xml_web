@@ -26,6 +26,36 @@ declare function inf:diakok($tanev as xs:string) as node()* {
   return $k
 };
 
+declare function inf:diakok-in-osztaly($osztaly-id as xs:string) as node()* {
+  let $diak-id := db:open('rendszer')/rendszer/osztalyok/osztaly[@id=$osztaly-id]/diakok/diak
+  let $diakok := for $i in $diak-id 
+  for $j in db:open('rendszer')/rendszer/diakok/diak
+  where $i/. = data($j/@id)
+  return $j
+  
+  return $diakok
+};
+
+declare updating function inf:delete-diak-from-osztaly($osztaly-id as xs:string, $diak-id as xs:string) {
+  for $i in db:open('rendszer')//osztalyok/osztaly[@id = $osztaly-id]/diakok/diak where data($i/.) = $diak-id return (delete node $i) 
+};
+
+declare updating function inf:delete-ora-from-osztaly($osztaly-id as xs:string, $ora-id as xs:integer) {
+  for $i in db:open('rendszer')//osztalyok/osztaly[@id = $osztaly-id]/orarend/ora where data($i/@id) = $ora-id return (delete node $i) 
+};
+
+declare updating function inf:delete-szunet-from-tanev($tanev-id as xs:string, $szunet-id as xs:integer) {
+  for $i in db:open('rendszer')/rendszer/tanevek/tanev[@id = $tanev-id]/szunetek/szunet where data($i/@id) = $szunet-id return (delete node $i) 
+};
+
+declare updating function inf:delete-jegy-from-diak($diak-id as xs:integer, $jegy-id as xs:integer) {
+  for $i in db:open('rendszer')/rendszer/diakok/diak[@id = $diak-id]/jegyei/jegy where data($i/@id) = $jegy-id return (delete node $i) 
+};
+
+declare updating function inf:delete-fogadoora-from-tanar($fogadoora-id as xs:integer, $tanar-id as xs:integer) {
+  for $i in db:open('rendszer')/rendszer/tanarok/tanar[@id = $tanar-id]/fogadoorak/fogadoora where data($i/@id) = $fogadoora-id return (delete node $i) 
+};
+
 (: A tanévek csökkenő sorrendben. :)
 declare function inf:tanevekId-descending() as xs:token* {
   for $i in doc('rendszer')//rendszer/tanevek/tanev

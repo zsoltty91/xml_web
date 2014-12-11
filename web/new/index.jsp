@@ -32,7 +32,7 @@
                             <td>
                                 <form method="post" action="RemoveStudentServlet">
                                     <input type="hidden" name="id" value="${student.id}"/>
-                                    <input type="submit" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>
                         </tr>
@@ -66,7 +66,7 @@
                             <td>
                                 <form method="post" action="RemoveTeacherServlet">
                                     <input type="hidden" name="id" value="${teacher.id}"/>
-                                    <input type="submit" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>                        
                         </tr>
@@ -95,7 +95,7 @@
                             <td>
                                 <form method="post" action="RemoveSubjectServlet">
                                     <input type="hidden" name="id" value="${subject.id}"/>
-                                    <input type="submit" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>
                         </tr>
@@ -128,7 +128,7 @@
                             <td>
                                 <form method="post" action="RemoveRoomServlet">
                                     <input type="hidden" name="id" value="${room.id}"/>
-                                    <input type="submit" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>
                         </tr>
@@ -163,7 +163,7 @@
                             <td>
                                 <form method="post" action="RemoveSchoolYearServlet">
                                     <input type="hidden" name="id" value="${schoolYear.id}"/>
-                                    <input type="submit" class="red" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>                        
                         </tr>
@@ -200,7 +200,7 @@
                             <td>
                                 <form method="post" action="RemoveClassServlet">
                                     <input type="hidden" name="id" value="${class.id}"/>
-                                    <input type="submit" value="Delete"/>
+                                    <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/cross.png" style="vertical-align: middle;"/></a>
                                 </form>
                             </td>                        
                         </tr>
