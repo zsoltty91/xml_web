@@ -15,7 +15,7 @@ import servlet.CommonServlet;
  *
  * @author zsolti
  */
-@WebServlet(value = "/RemoveStudentFromClassServlet")
+@WebServlet(value = "/new/RemoveStudentFromClassServlet")
 public class RemoveStudentFromClassServlet extends CommonServlet {
 
     @Override
@@ -23,7 +23,7 @@ public class RemoveStudentFromClassServlet extends CommonServlet {
         url = "class.jsp?classId="+request.getParameter("classId");
         forward=false;
         
-        String studentId = request.getParameter("studentId");
+        String studentId = request.getParameter("id");
         String classId = request.getParameter("classId");
 
         if (!(studentId.isEmpty() || classId.isEmpty())) {
