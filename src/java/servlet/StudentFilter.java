@@ -45,11 +45,23 @@ public class StudentFilter implements Filter {
             throws IOException, ServletException {
 
         String id = request.getParameter("studentId");
+        String subjectId = request.getParameter("subjectId");
         try {
             Student student = Student.find(id);
+            ArrayList<Mark> marks = new ArrayList<>();
             for (Mark mark : student.getMarks()) {
-                mark.setSubject(Subject.find(mark.getSubject().getId()));
+                Subject s = Subject.find(mark.getSubject().getId());
+                if (subjectId != null && !subjectId.isEmpty()) {
+                    if (s.getId().equals(subjectId)) {
+                        mark.setSubject(s);
+                        marks.add(mark);
+                    }
+                } else {
+                    mark.setSubject(s);
+                    marks.add(mark);
+                }
             }
+            student.setMarks(marks);
             //Logger.getLogger("dsdf").warning(student.getMarks().get(0).getSubject().getId());
             request.setAttribute("student", student);
             request.setAttribute("subjects", Subject.findAll());

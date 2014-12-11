@@ -33,7 +33,23 @@
         </div></div>
     <div class="box">
         <div class="header"><h2>Jegyei</h2></div>
-        <div class="content" id="homew">            
+        <div class="content" id="homew">   
+            <form method="post" action="">   
+                <input type="hidden" name="studentId" value="${param.studentId}"/>
+                <select name="subjectId" class="chzn-choices" style="width: 12em;">
+                    <c_rt:forEach var="subject" items="${subjects}">
+                        <c:choose>
+                            <c:when test="${param.subjectId == subject.id}">
+                                <option selected value="${subject.id}">${subject.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${subject.id}">${subject.name}</option>
+                            </c:otherwise>
+                        </c:choose>                        
+                    </c_rt:forEach>
+                </select>
+                <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/arrow-circle-225-left.png" style="vertical-align: middle;"/> Frissítés</a>
+            </form>
             <table class="sortableTable">
                 <thead>
                     <tr>
