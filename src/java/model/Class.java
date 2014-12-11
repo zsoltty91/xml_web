@@ -135,7 +135,7 @@ public class Class implements XmlID {
 
     public void remove() throws IOException {
         new ClassDAO(this).remove();
-    }
+    }        
 
     @Override
     public String toString() {

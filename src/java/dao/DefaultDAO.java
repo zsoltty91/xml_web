@@ -71,12 +71,13 @@ public class DefaultDAO<T extends Object> {
      */
     protected ArrayList<String> query(String query) throws IOException {
         logger.debug("Query: " + query);
-        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'C:\\Users\\zsolti\\Documents\\NetBeansProjects\\xml_web\\build\\web\\WEB-INF\\classes\\main\\resources\\xquery.xq';\n"+query;
+        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\basex\\src\\main\\resources\\xquery.xq';\n"+query;
         return conn.query(query);
     }
 
     protected void executeQuery(String query) throws IOException {
         logger.debug("Query: " + query);
+        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\basex\\src\\main\\resources\\xquery.xq';\n"+query;
         conn.executeQuery(query);
     }
 

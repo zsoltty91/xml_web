@@ -50,7 +50,7 @@ public class StudentFilter implements Filter {
             for (Mark mark : student.getMarks()) {
                 mark.setSubject(Subject.find(mark.getSubject().getId()));
             }
-            Logger.getLogger("dsdf").warning(student.getMarks().get(0).getSubject().getId());
+            //Logger.getLogger("dsdf").warning(student.getMarks().get(0).getSubject().getId());
             request.setAttribute("student", student);
             request.setAttribute("subjects", Subject.findAll());
             request.setAttribute("schoolYears", SchoolYear.findAll());

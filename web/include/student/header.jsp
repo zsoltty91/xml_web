@@ -137,10 +137,7 @@
                     <td>                        
                         <form method="post" action="main.jsp" style="float: left; padding: 10px 5px 4px 5px; background: #ccc; margin: -10px 0 -5px 5px;">                
                             <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/home.png" style="vertical-align: middle;"/></a>
-                        </form>     
-                        <form method="post" action="inbox.jsp" style="display: inline; padding: 15px 5px 2px 5px; background: #ccc; margin: -10px 5px -3px 5px;">                
-                            <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/mail.png" style="vertical-align: bottom;"/><img id="notify" style="margin-left: -7px; top: -13px;"/></a>
-                        </form>                                              
+                        </form>                                                                          
                     </td>
                     <td>
                         <form method="post" action="../logout">                
@@ -152,18 +149,14 @@
             <div id="header">
                 <div class="content">    
                     <ul>
-                        <li class="headerLi"><a href="main.jsp">Nyitólap</a></li>
-                        <li class="headerLi"><a href="about.jsp">Személyes adatok</a></li>
-                        <li class="headerLi"><a href="myGrades.jsp">Jegyeim</a></li>                        
-                        <li class="headerLi"><a href="myLessons.jsp">Óráim</a></li>                        
-                        <li class="headerLi"><a href="settings.jsp">Beállítások</a></li>                        
+                        <li class="headerLi"><a href="main.jsp">Fejlett adatbázis-rendszerek</a></li>                                               
                     </ul>                
                 </div>                 
             </div>        
             <div id="subHeader">
                 <div class="content">
                     <ul class="subHeaderUl">                        
-                        <li><a href="password.jsp">Jelszóváltoztatás</a></li>
+                        <li><a href="password.jsp">Tanulmányi Rendszer</a></li>
                     </ul>
                     <ul class="subHeaderUl" style="display: none;">
                         <li><a href="password.jsp">Jelszóváltoztatás</a></li>

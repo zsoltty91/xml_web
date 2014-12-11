@@ -70,4 +70,12 @@ public class ClassDAO extends DefaultDAO<model.Class> {
             closeConnection();
         }
     }
+    
+    public void removeStudent(String id) throws IOException {        
+        try {            
+            query("inf:delete-diak-from-osztaly('" + object.getId() + "', '" + id + "')");            
+        } finally {
+            closeConnection();
+        }
+    }
 }

@@ -11,6 +11,7 @@
     <filter-mapping>
         <filter-name>TeacherFilter</filter-name>
         <url-pattern>/teacher.jsp</url-pattern>
+        <url-pattern>/new/teacher.jsp</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>SchoolYearFilter</filter-name>
@@ -19,6 +20,7 @@
     <filter-mapping>
         <filter-name>SchoolYearFilter</filter-name>
         <url-pattern>/schoolyear.jsp</url-pattern>
+        <url-pattern>/new/schoolyear.jsp</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>StudentFilter</filter-name>
@@ -27,6 +29,7 @@
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
         <url-pattern>/student.jsp</url-pattern>
+        <url-pattern>/new/student.jsp</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>ClassFilter</filter-name>
@@ -35,10 +38,12 @@
     <filter-mapping>
         <filter-name>ClassFilter</filter-name>
         <url-pattern>/class.jsp</url-pattern>
+        <url-pattern>/new/class.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>ListFilter</filter-name>
         <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/new/index.jsp</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Log4j</servlet-name>
@@ -57,4 +62,11 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>/new/*</url-pattern>
+            <include-prelude>/include/student/header.jsp</include-prelude>
+            <include-coda>/include/student/footer.jsp</include-coda>
+        </jsp-property-group>        
+    </jsp-config>
 </web-app>

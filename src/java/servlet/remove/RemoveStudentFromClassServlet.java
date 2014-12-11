@@ -31,9 +31,11 @@ public class RemoveStudentFromClassServlet extends CommonServlet {
             student.setId(studentId);
             try {
                 model.Class classObj = model.Class.find(classId);
-                classObj.removeStudent(student);
-                classObj.remove();
-                classObj.add();
+                dao.ClassDAO dao = new dao.ClassDAO(classObj);
+                dao.removeStudent(studentId);
+                //classObj.removeStudent(student);
+                //classObj.remove();
+                //classObj.add();
                 successm = "Sikeresen törölve!";
             } catch (Exception ex) {
                 errm = ex.getMessage();
