@@ -27,6 +27,7 @@ declare function inf:diakok($tanev as xs:string) as node()* {
   return $k
 };
 
+(: Egy adott osztályba járó diákok listája :)
 declare function inf:diakok-in-osztaly($osztaly-id as xs:string) as node()* {
   let $diak-id := db:open('rendszer')/rendszer/osztalyok/osztaly[@id=$osztaly-id]/diakok/diak
   let $diakok := for $i in $diak-id 
@@ -159,17 +160,34 @@ declare function inf:top-3-diak() as node()* {
   return $i
 };
 
-declare function inf:top-3-diak($tanev as xs:string) as node()* {
-  let $diakok := inf:diakok($tanev)
-  let $diak-atlag := for $i in $diakok
-                      let $atlag := $i/jegyei/jegy/erdemjegy  
-                      return <diak>{$i/nev}<atlag>{avg(data($atlag))}</atlag></diak>
-  
-  let $diak-atlag-desc := for $i in $diak-atlag order by $i/atlag descending return $i
-  
-  for $i in subsequence($diak-atlag-desc, 1, 3)   
-  return $i  
+
+declare function inf:diak-plusz-atlag($tanev as xs:string) as node()* {  
+  for $i in inf:diakok($tanev) 
+  let $atlag := $i/jegyei/jegy/erdemjegy 
+  return copy $temp := $i modify insert node <atlag>{avg(data($atlag))}</atlag> into $temp
+  return $temp  
 };
+
+declare function inf:top-diak($tanev as xs:string, $mennyi as xs:integer) as node()* {
+  let $diakok := inf:diak-plusz-atlag($tanev)
+  let $diakok-desc := for $i in $diakok
+  order by data($i/atlag) descending
+  return $i
+  
+  for $i in subsequence($diakok-desc, 1, $mennyi)
+  return $i
+};
+
+declare function inf:top-diak($mennyi as xs:integer) as node()* {
+  let $diakok := inf:diak-plusz-atlag(inf:aktualisTanev())
+  let $diakok-desc := for $i in $diakok
+  order by data($i/atlag) descending
+  return $i
+  
+  for $i in subsequence($diakok-desc, 1, $mennyi)
+  return $i
+};
+
 
 declare function inf:max-id-szunet() as xs:double {
   let $id := db:open('rendszer')/rendszer/tanevek/tanev/szunetek/szunet/@id

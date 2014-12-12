@@ -19,9 +19,12 @@
         <link type="text/css" href="../css/jquery-ui.css" rel="stylesheet"/>  
         <link type="text/css" href="../css/tablesorter/style.css" rel="stylesheet"/>                          
         <link type="text/css" href="../css/onoff.css" rel="stylesheet"/>                          
+        <link type="text/css" href="../css/vs.css" rel="stylesheet"/>  
 
         <!-- <script src="http://code.jquery.com/jquery-1.8.2.js"></script>         
         <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script> -->
+        <script src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <script src="../js/jquery-1.8.2.js"></script>
         <script src="../js/jquery-ui.js"></script>
         <script src="../js/timepicker.js"></script>

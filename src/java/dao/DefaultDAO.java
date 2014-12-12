@@ -23,6 +23,7 @@ public class DefaultDAO<T extends Object> {
     private Database db;
     private Connection conn;
     private final Class<T> objectClass;
+    public ArrayList<String> queryResult;
 
     protected static Logger logger = Logger.getLogger(DefaultDAO.class);
 
@@ -64,14 +65,22 @@ public class DefaultDAO<T extends Object> {
      */
     protected ArrayList<T> getObjectsByQuery(String query) throws IOException, JAXBException {
         return getObjects(query(query));
-    }
+    }   
+    
+    protected ArrayList<T> getObjectsBy(ArrayList<String> query) throws IOException, JAXBException {
+        return getObjects(query);
+    }   
+    
+    protected ArrayList<String> getResultByQuery(String query) throws IOException, JAXBException {
+        return query(query);
+    } 
 
     /*
      @return empty <code>ArrayList<String></code> if there is no result.
      */
     protected ArrayList<String> query(String query) throws IOException {
         logger.debug("Query: " + query);
-        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\xquery.xq';\n"+query;
+        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\xquery.xq';\n"+query;        
         return conn.query(query);
     }
 

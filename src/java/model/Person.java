@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author zsolti
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Person implements XmlID{
+public class Person implements XmlID{        
 
     @XmlAttribute
     private String id;

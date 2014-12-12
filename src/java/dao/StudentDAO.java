@@ -71,4 +71,31 @@ public class StudentDAO extends DefaultDAO<Student>{
             closeConnection();
         }
     }
+    
+    public ArrayList<Student> findActive() throws IOException, JAXBException {
+        try {
+            this.queryResult = getResultByQuery("inf:aktivDiakok()");   
+            return getObjects(this.queryResult);                   
+        } finally {
+            closeConnection();
+        }
+    }
+    
+    public ArrayList<Student> findTop(int mennyi) throws IOException, JAXBException {
+        try {
+            this.queryResult = getResultByQuery("inf:top-diak("+mennyi+")");
+            return getObjects(this.queryResult);            
+        } finally {
+            closeConnection();
+        }
+    }
+    
+    public ArrayList<Student> findTop(String tanev, int mennyi) throws IOException, JAXBException {
+        try {
+            this.queryResult = getResultByQuery("inf:top-diak('"+tanev+"',"+mennyi+")");
+            return getObjects(this.queryResult);                     
+        } finally {
+            closeConnection();
+        }
+    }
 }
