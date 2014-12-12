@@ -5,6 +5,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,12 +37,15 @@ public abstract class CommonServlet extends HttpServlet {
     private void doBefore(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         request.removeAttribute("successMessage");
         request.removeAttribute("errorMessage");
     }
     
     private void doAfter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try {
             request.setAttribute("students", Student.findAll());
             request.setAttribute("teachers", Teacher.findAll());
@@ -63,20 +67,27 @@ public abstract class CommonServlet extends HttpServlet {
             logger.error(ex.getMessage());
         }
         
+        String concat = "";
         if (errm != null) {
             request.setAttribute("errorMessage", errm);
+            concat = "?errorMessage=" + URLEncoder.encode(errm);
         }
         if (successm != null) {
             request.setAttribute("successMessage", successm);
-        }
+            if (errm != null) {
+                concat += "&successMessage=" + URLEncoder.encode(successm);
+            } else {
+                concat = "?successMessage=" + URLEncoder.encode(successm);
+            }
+        }                
         errm = null;
         successm = null;
         
         if (forward) {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } else {
-            response.sendRedirect(url);
+        } else {            
+            response.sendRedirect(url +concat);
         }
     }
 

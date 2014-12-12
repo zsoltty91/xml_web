@@ -8,7 +8,7 @@
 <%@taglib prefix="c_rt" uri="http://java.sun.com/jstl/core_rt" %>
 <div id="left">
     <div class="box">
-        <div class="header"><h2>Diákok</h2></div>
+        <div class="header"><h2>Összes diák</h2></div>
         <div class="content" id="homew">  
             <form method="post" action="activeStudents.jsp" style="float: left; padding-right: 10px;">                   
                 <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/users.png" style="vertical-align: middle;"/> Jelenlegi diákok</a>

@@ -20,6 +20,7 @@ public class AddSubjectServlet extends CommonServlet {
 
     @Override
     public void doServlet(HttpServletRequest request, HttpServletResponse response) {
+        
         url = "index.jsp";
         String nev = request.getParameter("nev");
 

@@ -60,9 +60,8 @@ public class OfokFilter implements Filter {
             TeacherDAO teacherDAO = new TeacherDAO();
             request.setAttribute("teachers", teacherDAO.findOsztalyfonokok(tanev));          
             ArrayList<String> normalized = new ArrayList<>();
-            for (String s : teacherDAO.queryResult) {                
-                s = s.replaceAll("\\t", "");
-                System.out.println(s);
+            for (String s : teacherDAO.queryResult) {                                
+                System.out.println(teacherDAO.queryResult.size());
                 s = s.replace("<", "&lt;").replace(">", "&gt;").trim();                
                 normalized.add(s);
             }

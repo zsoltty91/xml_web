@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Neptun - Main</title>
+        <title>Tanulmányi rendszer</title>
 
         <!-- CSS -->        
         <link type="text/css" href="../css/include/header.css" rel="stylesheet" />
@@ -141,12 +141,7 @@
                         <form method="post" action="index.jsp" style="float: left; padding: 10px 5px 4px 5px; background: #ccc; margin: -10px 0 -5px 5px;">                
                             <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/home.png" style="vertical-align: middle;"/></a>
                         </form>                                                                          
-                    </td>
-                    <td>
-                        <form method="post" action="../logout">                
-                            <a onclick="this.parentNode.submit()" style="cursor: pointer;">[ <img src="../images/control-power.png" style="vertical-align: middle;"/> Kijelentkezés ]</a>
-                        </form>                                               
-                    </td>
+                    </td>                    
                 </tr>    
             </table>
             <div id="header">
@@ -181,7 +176,7 @@
                                 <c:if test="${param.errorMessage != null}">
                                 <td><h2>${param.errorMessage}</h2> </td>
                             </c:if>
-                            <c:if test="${param.errorMessage == null}">
+                            <c:if test="${errorMessage == null}">
                                 <td><h2>${errorMessage}</h2> </td>
                             </c:if>
                         </tr>                     
@@ -196,7 +191,7 @@
                                 <c:if test="${param.successMessage != null}">
                                 <td><h2>${param.successMessage}</h2> </td>
                             </c:if>
-                            <c:if test="${param.successMessage == null}">
+                            <c:if test="${successMessage == null}">
                                 <td><h2>${successMessage}</h2> </td>
                             </c:if>
                         </tr>                     
