@@ -47,18 +47,25 @@ public class TopStudentsFilter implements Filter {
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
 
+        String mennyi = request.getParameter("mennyi");
+        int m;
+        if (mennyi != null) {
+            m = Integer.parseInt(mennyi);
+        } else {
+            m = 3;
+        }        
         try {
             StudentDAO studentDAO = new StudentDAO();
-            request.setAttribute("students", studentDAO.findTop(3));             
+            request.setAttribute("students", studentDAO.findTop(m));
             ArrayList<String> normalized = new ArrayList<>();
-            for (String s : studentDAO.queryResult) {                
+            for (String s : studentDAO.queryResult) {
                 s = s.replaceAll("\\t", "");
                 System.out.println(s);
-                s = s.replace("<", "&lt;").replace(">", "&gt;").trim();                
+                s = s.replace("<", "&lt;").replace(">", "&gt;").trim();
                 normalized.add(s);
             }
-            
-            request.setAttribute("xml", normalized);            
+
+            request.setAttribute("xml", normalized);
             //throw new RuntimeException("itten");
         } catch (JAXBException ex) {
             Logger.getLogger(TopStudentsFilter.class.getName()).log(Level.SEVERE, null, ex);

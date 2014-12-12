@@ -31,8 +31,8 @@ import model.Teacher;
  *
  * @author zsolti
  */
-@WebFilter("/new/activeStudents.jsp")
-public class ActiveStudentsFilter implements Filter {
+@WebFilter("/new/inactiveStudents.jsp")
+public class InactiveStudentsFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -41,23 +41,15 @@ public class ActiveStudentsFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public ActiveStudentsFilter() {
+    public InactiveStudentsFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {  
-        
-        String tanev = request.getParameter("tanev");
-        String t;
-        if (tanev == null) {
-            tanev = "inf:aktualisTanev()";
-        } else {
-            tanev = "'" + tanev + "'";
-        }
+            throws IOException, ServletException {                  
         
         try {
             StudentDAO studentDAO = new StudentDAO();
-            request.setAttribute("students", studentDAO.findActive(tanev));          
+            request.setAttribute("students", studentDAO.findInactive());          
             ArrayList<String> normalized = new ArrayList<>();
             for (String s : studentDAO.queryResult) {                
                 s = s.replaceAll("\\t", "");

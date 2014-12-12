@@ -72,9 +72,18 @@ public class StudentDAO extends DefaultDAO<Student>{
         }
     }
     
-    public ArrayList<Student> findActive() throws IOException, JAXBException {
+    public ArrayList<Student> findActive(String tanev) throws IOException, JAXBException {
         try {
-            this.queryResult = getResultByQuery("inf:aktivDiakok()");   
+            this.queryResult = getResultByQuery("inf:diakok("+tanev+")");   
+            return getObjects(this.queryResult);                   
+        } finally {
+            closeConnection();
+        }
+    }
+    
+    public ArrayList<Student> findInactive() throws IOException, JAXBException {
+        try {
+            this.queryResult = getResultByQuery("inf:inaktivDiakok()");   
             return getObjects(this.queryResult);                   
         } finally {
             closeConnection();

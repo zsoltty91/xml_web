@@ -13,12 +13,8 @@
 </div>
 <div id="left">
     <div class="box">
-        <div class="header"><h2>Jelenleg is diákok</h2></div>
-        <div class="content" id="homew"> 
-            <form method="post" action="">   
-                Tanév: <input type="text" name="tanev"/>                                
-                <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/arrow-circle-225-left.png" style="vertical-align: middle;"/> Frissítés</a>
-            </form>
+        <div class="header"><h2>Volt diákok</h2></div>
+        <div class="content" id="homew">             
             <table class="sortableTable">
                 <thead>
                     <tr>

@@ -6,6 +6,7 @@
 package servlet;
 
 import dao.StudentDAO;
+import dao.TeacherDAO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -31,8 +32,8 @@ import model.Teacher;
  *
  * @author zsolti
  */
-@WebFilter("/new/activeStudents.jsp")
-public class ActiveStudentsFilter implements Filter {
+@WebFilter("/new/ofok.jsp")
+public class OfokFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -41,7 +42,7 @@ public class ActiveStudentsFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public ActiveStudentsFilter() {
+    public OfokFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -56,10 +57,10 @@ public class ActiveStudentsFilter implements Filter {
         }
         
         try {
-            StudentDAO studentDAO = new StudentDAO();
-            request.setAttribute("students", studentDAO.findActive(tanev));          
+            TeacherDAO teacherDAO = new TeacherDAO();
+            request.setAttribute("teachers", teacherDAO.findOsztalyfonokok(tanev));          
             ArrayList<String> normalized = new ArrayList<>();
-            for (String s : studentDAO.queryResult) {                
+            for (String s : teacherDAO.queryResult) {                
                 s = s.replaceAll("\\t", "");
                 System.out.println(s);
                 s = s.replace("<", "&lt;").replace(">", "&gt;").trim();                

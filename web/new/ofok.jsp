@@ -13,8 +13,8 @@
 </div>
 <div id="left">
     <div class="box">
-        <div class="header"><h2>Jelenleg is diákok</h2></div>
-        <div class="content" id="homew"> 
+        <div class="header"><h2>Osztályfönökök</h2></div>
+        <div class="content" id="homew">
             <form method="post" action="">   
                 Tanév: <input type="text" name="tanev"/>                                
                 <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/arrow-circle-225-left.png" style="vertical-align: middle;"/> Frissítés</a>
@@ -28,11 +28,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c_rt:forEach var="student" items="${students}">
+                    <c_rt:forEach var="teacher" items="${teachers}">
                         <tr>
-                            <td>${student.id}</td>
-                            <td><img src="../images/user-business-gray.png" style="vertical-align: middle;"/> ${student.name}</td>
-                            <td><img src="../images/mail.png" style="vertical-align: middle;"/> ${student.email}</td>                            
+                            <td>${teacher.id}</td>
+                            <td><img src="../images/user-business-gray.png" style="vertical-align: middle;"/> ${teacher.name}</td>
+                            <td><img src="../images/mail.png" style="vertical-align: middle;"/> ${teacher.email}</td>                                                    
                         </tr>
                     </c_rt:forEach>
                 </tbody>

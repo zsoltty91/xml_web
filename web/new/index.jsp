@@ -13,6 +13,9 @@
             <form method="post" action="activeStudents.jsp" style="float: left; padding-right: 10px;">                   
                 <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/users.png" style="vertical-align: middle;"/> Jelenlegi diákok</a>
             </form>
+            <form method="post" action="inactiveStudents.jsp" style="float: left; padding-right: 10px;">                   
+                <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/users.png" style="vertical-align: middle;"/> Volt diákok</a>
+            </form>
             <form method="post" action="topStudents.jsp">                   
                 <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/users.png" style="vertical-align: middle;"/> TOP diákok</a>
             </form>
@@ -49,7 +52,10 @@
     </div>
     <div class="box">
         <div class="header"><h2>Tanárok</h2></div>
-        <div class="content" id="homew">              
+        <div class="content" id="homew">   
+            <form method="post" action="ofok.jsp">                   
+                <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/users.png" style="vertical-align: middle;"/> Osztályfönökök</a>
+            </form>
             <table class="sortableTable">
                 <thead>
                     <tr>

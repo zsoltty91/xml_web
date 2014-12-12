@@ -14,7 +14,11 @@
 <div id="left">
     <div class="box">
         <div class="header"><h2>TOP diákok</h2></div>
-        <div class="content" id="homew">  
+        <div class="content" id="homew">
+            <form method="post" action="">   
+                TOP: <input type="text" name="mennyi"/>                                
+                <a onclick="this.parentNode.submit()" style="cursor: pointer;"><img src="../images/arrow-circle-225-left.png" style="vertical-align: middle;"/> Frissítés</a>
+            </form>
             <table class="sortableTable">
                 <thead>
                     <tr>
@@ -35,14 +39,5 @@
             </table>
         </div>
     </div>
-    <div class="box">        
-        <div class="header"><h2>XML eredmény</h2></div>
-        <div class="content" id="homew" style="font-size: 1.3em;">
-            <pre><code class="xml">
-                <c_rt:forEach var="sor" items="${xml}">
-                    ${sor}
-                </c_rt:forEach>
-            </code></pre>
-        </div>
-    </div>
+    <%@include file="../jspf/xml_result.jsp" %>
 </div>

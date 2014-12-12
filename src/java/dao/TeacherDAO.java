@@ -40,6 +40,15 @@ public class TeacherDAO extends DefaultDAO<Teacher> {
         }
     }
     
+    public ArrayList<Teacher> findOsztalyfonokok(String tanev) throws IOException, JAXBException {
+        try {
+            this.queryResult = getResultByQuery("inf:osztalyfonokok("+tanev+")");   
+            return getObjects(this.queryResult);                   
+        } finally {
+            closeConnection();
+        }
+    }
+    
     public void generateId() throws IOException {
         String query = query("inf:max-id-tanar()").get(0);
         logger.info("Max id:"+query);
