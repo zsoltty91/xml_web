@@ -51,7 +51,7 @@
             <xs:field xpath="."></xs:field>
         </xs:keyref>        
         <xs:keyref name="tanar-osztalya-keyref" refer="osztaly-id">
-            <xs:selector xpath="tanarok/tanar/osztalya"></xs:selector>
+            <xs:selector xpath="tanarok/tanar/osztaly"></xs:selector>
             <xs:field xpath="."></xs:field>
         </xs:keyref>        
         <xs:keyref name="osztaly-tanev-keyref" refer="tanev-id">
@@ -83,7 +83,7 @@
     <xs:element name="tanevek">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="tanev"></xs:element>        
+                <xs:element ref="tanev" minOccurs="0" maxOccurs="unbounded"></xs:element>        
             </xs:sequence>
         </xs:complexType>
         <xs:key name="tanev-id">
@@ -129,7 +129,7 @@
     <xs:element name="diakok">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="diak" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                <xs:element ref="diak" minOccurs="0" maxOccurs="unbounded"></xs:element>
             </xs:sequence>
         </xs:complexType>
         <xs:key name="diak-id">
@@ -174,7 +174,7 @@
     <xs:element name="tanarok">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="tanar" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                <xs:element ref="tanar" minOccurs="0" maxOccurs="unbounded"></xs:element>
             </xs:sequence>
         </xs:complexType>
         <xs:key name="tanar-id">
@@ -188,20 +188,25 @@
             <xs:sequence>
                 <xs:element name="nev" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
                 <xs:element name="email" minOccurs="0" maxOccurs="1" type="emailType"></xs:element>
-                <xs:element name="osztalya" minOccurs="0" maxOccurs="1" type="xs:token"></xs:element>
+                <xs:element name="osztaly" minOccurs="0" maxOccurs="1" type="xs:token"></xs:element>
                 <xs:element name="fogadoorak" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="fogadoora" minOccurs="1" maxOccurs="unbounded">
+                            <xs:element name="fogadoora" minOccurs="0" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="nap" type="napok-hu"></xs:element>
                                         <xs:element name="idopont" type="xs:time"></xs:element>
                                     </xs:sequence>
-                                </xs:complexType>
+                                    <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
+                                </xs:complexType>                                
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>
+                    <xs:key name="fogadoora-id">
+                        <xs:selector xpath="fogadoora"></xs:selector>
+                        <xs:field xpath="@id"></xs:field>
+                    </xs:key>
                 </xs:element>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
@@ -211,7 +216,7 @@
     <xs:element name="termek">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="terem" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                <xs:element ref="terem" minOccurs="0" maxOccurs="unbounded"></xs:element>
             </xs:sequence>
         </xs:complexType>
         <xs:key name="terem-id">
@@ -234,7 +239,7 @@
     <xs:element name="osztalyok">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="osztaly"></xs:element>
+                <xs:element ref="osztaly" minOccurs="0" maxOccurs="unbounded"></xs:element>
             </xs:sequence>
         </xs:complexType>    
         <xs:key name="osztaly-id">
@@ -252,14 +257,14 @@
                 <xs:element name="diakok" minOccurs="1" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="diak" minOccurs="1" maxOccurs="unbounded" type="xs:integer"></xs:element>
+                            <xs:element name="diak" minOccurs="0" maxOccurs="unbounded" type="xs:integer"></xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="orarend" minOccurs="1" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="ora" minOccurs="1" maxOccurs="unbounded">
+                            <xs:element name="ora" minOccurs="0" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="nap" minOccurs="1" maxOccurs="1" type="napok-hu"></xs:element>
@@ -268,10 +273,15 @@
                                         <xs:element name="tanar" minOccurs="1" maxOccurs="1" type="xs:integer"></xs:element>
                                         <xs:element name="terem" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
                                     </xs:sequence>
+                                    <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
                                 </xs:complexType>
                             </xs:element>
-                        </xs:sequence>
+                        </xs:sequence>                        
                     </xs:complexType>
+                    <xs:key name="ora-id">
+                        <xs:selector xpath="ora"></xs:selector>
+                        <xs:field xpath="@id"></xs:field>
+                    </xs:key>
                 </xs:element>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
@@ -281,7 +291,7 @@
     <xs:element name="tantargyak">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="tantargy" minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="tantargy" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>                        
                         <xs:attribute name="id" use="required" type="xs:token"></xs:attribute>
                         <xs:attribute name="nev" use="required" type="xs:token"></xs:attribute>

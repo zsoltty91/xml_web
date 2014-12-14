@@ -173,7 +173,7 @@
         <tanar id="1">
             <nev>Kiss László</nev>
             <email>kiss.laszlo@gmail.com</email>
-            <osztaly>9/D-14/15</osztaly>
+            <osztaly>11/D-214/2015</osztaly>
             <fogadoorak>
                 <fogadoora id="1">
                     <nap>hétfő</nap>
@@ -229,7 +229,7 @@
         </terem>
     </termek>
     <osztalyok>
-        <osztaly id="9/D-12/13">
+        <osztaly id="9/D-2012/2013">
             <nev>9/D</nev>
             <tanev>2012/2013</tanev>
             <osztalyfonok>1</osztalyfonok>
@@ -257,11 +257,11 @@
                 </ora>
             </orarend>
         </osztaly>
-        <osztaly id="9/C-12/13">
+        <osztaly id="9/C-2012/2013">
             <nev>9/C</nev>
             <tanev>2012/2013</tanev>
             <osztalyfonok>2</osztalyfonok>
-            <diakok> </diakok>
+            <diakok></diakok>
             <orarend>
                 <ora id="1">
                     <nap>hétfő</nap>
@@ -279,7 +279,7 @@
                 </ora>
             </orarend>
         </osztaly>
-        <osztaly id="10/D-13/14">
+        <osztaly id="10/D-2013/2014">
             <nev>10/D</nev>
             <tanev>2013/2014</tanev>
             <osztalyfonok>1</osztalyfonok>
@@ -304,7 +304,7 @@
                 </ora>
             </orarend>
         </osztaly>
-        <osztaly id="11/D-14/15">            
+        <osztaly id="11/D-2014/2015">            
             <nev>11/D</nev>
             <tanev>2014/2015</tanev>
             <osztalyfonok>1</osztalyfonok>
@@ -331,7 +331,7 @@
                 </ora>
             </orarend>
         </osztaly>
-        <osztaly id="11/C-14/15">            
+        <osztaly id="11/C-2014/2015">            
             <nev>11/C</nev>
             <tanev>2014/2015</tanev>
             <osztalyfonok>2</osztalyfonok>

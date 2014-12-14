@@ -1,6 +1,15 @@
 xquery version "3.0";
 module namespace inf = 'http://inf.unideb.hu/xml';
 
+(: Validáló :)
+declare function inf:validate() {
+  try {
+validate:xsd(db:open('rendszer'), 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\rendszer.xsd')
+} catch bxerr:BXVA0001 {
+  '[ERROR]' || $err:description || 'Validation faile'
+}
+};
+
 (: Az adott tanévben jelenlévő osztályok listája :)
 declare function inf:osztalyok($tanev as xs:string) as node()* {
   for $i in doc('rendszer')//rendszer/osztalyok/osztaly
