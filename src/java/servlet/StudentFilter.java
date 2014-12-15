@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.SchemaException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -68,6 +69,12 @@ public class StudentFilter implements Filter {
             request.setAttribute("schoolYears", SchoolYear.findAll());
         } catch (JAXBException ex) {
             Logger.getLogger(StudentFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SchemaException se) {
+            StringBuilder sb = new StringBuilder();
+            for (String s : se.errors) {                
+                sb.append(s).append("<br>");                
+            }  
+            request.setAttribute("errorMessage", sb.toString());
         }
     }
 

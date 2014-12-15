@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.SchemaException;
 import dao.TeacherDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,19 +46,19 @@ public class Teacher extends Person {
         this.consultingHours = consultingHours;
     }
 
-    public static Teacher find(String id) throws JAXBException, IOException {
+    public static Teacher find(String id) throws JAXBException, IOException, SchemaException {
         return new TeacherDAO().find(id);
     }
 
-    public static ArrayList<Teacher> findAll() throws JAXBException, IOException {
+    public static ArrayList<Teacher> findAll() throws JAXBException, IOException, SchemaException {
         return new TeacherDAO().findAll();
     }
 
-    public void add() throws IOException, JAXBException {
+    public void add() throws IOException, JAXBException, SchemaException {
         new TeacherDAO(this).add();
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new TeacherDAO(this).remove();
     }
 

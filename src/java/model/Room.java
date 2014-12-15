@@ -6,6 +6,7 @@
 package model;
 
 import dao.RoomDAO;
+import dao.SchemaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBException;
@@ -75,19 +76,19 @@ public class Room implements XmlID{
         this.ferohely = ferohely;
     }
 
-    public static Room find(int id) throws JAXBException, IOException {
+    public static Room find(int id) throws JAXBException, IOException, SchemaException {
         return new RoomDAO().find(id);
     }
 
-    public static ArrayList<Room> findAll() throws JAXBException, IOException {
+    public static ArrayList<Room> findAll() throws JAXBException, IOException, SchemaException {
         return new RoomDAO().findAll();
     }
     
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         new RoomDAO(this).add();
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new RoomDAO(this).remove();
     }
 

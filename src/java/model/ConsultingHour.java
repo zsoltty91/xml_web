@@ -6,6 +6,7 @@
 package model;
 
 import dao.ConsultingHourDAO;
+import dao.SchemaException;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -69,19 +70,19 @@ public class ConsultingHour implements XmlID {
         this.hour = hour;
     }
 
-    public static ConsultingHour find(String id) throws JAXBException, IOException {
+    public static ConsultingHour find(String id) throws JAXBException, IOException, SchemaException {
         return new ConsultingHourDAO().find(id);
     }
 
-    public static ArrayList<ConsultingHour> findAll() throws JAXBException, IOException {
+    public static ArrayList<ConsultingHour> findAll() throws JAXBException, IOException, SchemaException {
         return new ConsultingHourDAO().findAll();
     }
 
-    public void add(String teacherId) throws JAXBException, IOException {
+    public void add(String teacherId) throws JAXBException, IOException, SchemaException {
         new ConsultingHourDAO(this).add(teacherId);
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new ConsultingHourDAO(this).remove();
     }
 

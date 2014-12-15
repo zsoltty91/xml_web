@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.SchemaException;
 import dao.SubjectDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,19 +55,19 @@ public class Subject implements XmlID{
         this.name = nev;
     }
 
-    public static Subject find(String id) throws JAXBException, IOException {
+    public static Subject find(String id) throws JAXBException, IOException, SchemaException {
         return new SubjectDAO().find(id);
     }
 
-    public static ArrayList<Subject> findAll() throws JAXBException, IOException {
+    public static ArrayList<Subject> findAll() throws JAXBException, IOException, SchemaException {
         return new SubjectDAO().findAll();
     }
 
-    public void add() throws IOException, JAXBException {
+    public void add() throws IOException, JAXBException, SchemaException {
         new SubjectDAO(this).add();
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new SubjectDAO(this).remove();
     }
 

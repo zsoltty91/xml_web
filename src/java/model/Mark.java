@@ -6,6 +6,7 @@
 package model;
 
 import dao.MarkDAO;
+import dao.SchemaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBException;
@@ -81,19 +82,19 @@ public class Mark implements XmlID {
         this.mark = mark;
     }
 
-    public static Mark find(String id) throws JAXBException, IOException {
+    public static Mark find(String id) throws JAXBException, IOException, SchemaException {
         return new MarkDAO().find(id);
     }
 
-    public static ArrayList<Mark> findAll() throws JAXBException, IOException {
+    public static ArrayList<Mark> findAll() throws JAXBException, IOException, SchemaException {
         return new MarkDAO().findAll();
     }
 
-    public void add(String studentId) throws IOException, JAXBException {
+    public void add(String studentId) throws IOException, JAXBException, SchemaException {
         new MarkDAO(this).add(studentId);
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new MarkDAO(this).remove();
     }
 

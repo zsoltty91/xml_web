@@ -361,7 +361,7 @@
             </form>
         </div>
     </div>
-                <div class="pin">
+    <div class="pin">
         <div class="header">Terem létrehozása</div>
         <div class="content">
             <form class="right" action="<c:url value="AddRoomServlet"/>" method="post" >
@@ -376,8 +376,8 @@
                         <td>Labor:</td>
                         <td>
                             <select name="labor" class="chzn-choices" style="width: 12em;">                             
-                                    <option value="true" selected>Igen</option>
-                                    <option value="false">Nem</option>
+                                <option value="true" selected>Igen</option>
+                                <option value="false">Nem</option>
                             </select>
                         </td>
                     </tr>
@@ -385,8 +385,8 @@
                         <td>Projektor:</td>
                         <td>
                             <select name="projektor" class="chzn-choices" style="width: 12em;">                             
-                                    <option value="true" selected>Van</option>
-                                    <option value="false">Nincs</option>
+                                <option value="true" selected>Van</option>
+                                <option value="false">Nincs</option>
                             </select>
                         </td>
                     </tr>

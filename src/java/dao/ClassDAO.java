@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.SchemaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBException;
@@ -23,7 +24,7 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         super(model.Class.class, clazz);        
     }
 
-    public model.Class find(String id) throws JAXBException, IOException {
+    public model.Class find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer/osztalyok/osztaly[@id='" + id + "']");
         } finally {
@@ -31,7 +32,7 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         }
     }
 
-    public ArrayList<model.Class> findAll() throws JAXBException, IOException {
+    public ArrayList<model.Class> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer/osztalyok/osztaly");
         } finally {
@@ -40,22 +41,22 @@ public class ClassDAO extends DefaultDAO<model.Class> {
     }
 
     public void generateId() {
-        StringBuilder sb = new StringBuilder();
-        logger.warn("genereateidelott");
+        StringBuilder sb = new StringBuilder();        
         sb.append(this.object.getName()).append("-").append(this.object.getSchoolYear().getFrom().getYear()).append("/").append(this.object.getSchoolYear().getTo().getYear());
         logger.info(sb);
         object.setId(sb.toString());
     }
     
-    public void updateTeacher() throws JAXBException, IOException {
-        try {
-            executeQuery("replace value of node doc('rendszer')/rendszer/osztalyok/osztaly[@id='"+object.getId()+"']/osztalyfonok with '" + object.getTeacher().getId()+"'");
+    public void updateTeacher() throws JAXBException, IOException, SchemaException {
+        try {            
+            //executeQuery("replace value of node doc('rendszer')/rendszer/osztalyok/osztaly[@id='"+object.getId()+"']/osztalyfonok with '" + object.getTeacher().getId()+"'");
+            executeQuery("inf:update-tanar-into-osztaly('"+ object.getId() +"', " + Integer.parseInt(object.getTeacher().getId())+")");
         } finally {
             closeConnection();
         }
     }
     
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/osztalyok");
@@ -64,7 +65,7 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/osztalyok/osztaly[@id='" + object.getId() + "']");
         } finally {
@@ -72,7 +73,7 @@ public class ClassDAO extends DefaultDAO<model.Class> {
         }
     }
     
-    public void removeStudent(String id) throws IOException {        
+    public void removeStudent(String id) throws IOException, SchemaException {        
         try {            
             query("inf:delete-diak-from-osztaly('" + object.getId() + "', '" + id + "')");            
         } finally {

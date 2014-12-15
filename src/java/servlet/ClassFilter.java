@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
+import dao.SchemaException;
 import dao.StudentDAO;
+import dao.TeacherDAO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -33,58 +34,68 @@ import model.Teacher;
  * @author Rendszergazda
  */
 public class ClassFilter implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public ClassFilter() {
-    }    
-    
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
             log("SchoolYearFilter:DoBeforeProcessing");
         }
 
-	String id = request.getParameter("classId");
+        String id = request.getParameter("classId");
         model.Class cl;
         try {
             cl = model.Class.find(id);
-            
+
             SchoolYear sy = SchoolYear.find(cl.getSchoolYear().getId());
-            String tanev = sy.getFrom().getYear() + "/" + sy.getTo().getYear();               
-                    
-            cl.setTeacher(Teacher.find(cl.getTeacher().getId()));
+            String tanev = sy.getFrom().getYear() + "/" + sy.getTo().getYear();
+
+            if (cl.getTeacher() != null) {
+                cl.setTeacher(Teacher.find(cl.getTeacher().getId()));
+            }
+
             ArrayList<Student> diakok = new ArrayList<>();
-            for(Student diak: cl.getStudents()) {
-            diakok.add(Student.find(diak.getId()));
+            for (Student diak : cl.getStudents()) {
+                diakok.add(Student.find(diak.getId()));
             }
             cl.setStudents(diakok);
-            for(Lesson ora : cl.getLessons()) {
-            ora.setSubject(Subject.find(ora.getSubject().getId()));
-            ora.setTeacher(Teacher.find(ora.getTeacher().getId()));
+            for (Lesson ora : cl.getLessons()) {
+                ora.setSubject(Subject.find(ora.getSubject().getId()));
+                if (ora.getTeacher() != null) {
+                    ora.setTeacher(Teacher.find(ora.getTeacher().getId()));
+                }
             }
             request.setAttribute("class", cl);
-            request.setAttribute("teachers", Teacher.findAll());
+            request.setAttribute("teachers", new TeacherDAO().findNemOsztalyfonokok());
             request.setAttribute("subjects", Subject.findAll());
             request.setAttribute("rooms", Room.findAll());
-            request.setAttribute("students", new StudentDAO().findWithoutClass(tanev));            
+            request.setAttribute("students", new StudentDAO().findWithoutClass(tanev));
         } catch (JAXBException ex) {
             Logger.getLogger(ClassFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SchemaException se) {
+            StringBuilder sb = new StringBuilder();
+            for (String s : se.errors) {
+                sb.append(s).append("<br>");
+            }
+            request.setAttribute("errorMessage", sb.toString());
         }
-    }    
-    
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
             log("SchoolYearFilter:DoAfterProcessing");
         }
 
-	
     }
 
     /**
@@ -99,27 +110,27 @@ public class ClassFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("SchoolYearFilter:doFilter()");
         }
-        
+
         doBeforeProcessing(request, response);
-        
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
-	    // If an exception is thrown somewhere down the filter chain,
+            // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(request, response);
 
-	// If there was a problem, we want to rethrow it if it is
+        // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.
         if (problem != null) {
             if (problem instanceof ServletException) {
@@ -151,16 +162,16 @@ public class ClassFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("SchoolYearFilter:Initializing filter");
             }
         }
@@ -179,20 +190,20 @@ public class ClassFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -209,7 +220,7 @@ public class ClassFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -223,9 +234,9 @@ public class ClassFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

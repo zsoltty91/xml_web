@@ -176,7 +176,7 @@
                                 <c:if test="${param.errorMessage != null}">
                                 <td><h2>${param.errorMessage}</h2> </td>
                             </c:if>
-                            <c:if test="${errorMessage == null}">
+                            <c:if test="${errorMessage != null}">
                                 <td><h2>${errorMessage}</h2> </td>
                             </c:if>
                         </tr>                     
@@ -191,7 +191,7 @@
                                 <c:if test="${param.successMessage != null}">
                                 <td><h2>${param.successMessage}</h2> </td>
                             </c:if>
-                            <c:if test="${successMessage == null}">
+                            <c:if test="${successMessage != null}">
                                 <td><h2>${successMessage}</h2> </td>
                             </c:if>
                         </tr>                     

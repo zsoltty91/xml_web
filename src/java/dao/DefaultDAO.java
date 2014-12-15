@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.SchemaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBException;
@@ -19,11 +20,14 @@ import util.JAXBUtil;
  */
 public class DefaultDAO<T extends Object> {
 
+    private static final String XQUERY_PATH = "'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\xquery.xq'";
+    
     protected T object;
     private Database db;
     private Connection conn;
     private final Class<T> objectClass;
     public ArrayList<String> queryResult;
+    protected ArrayList<String> errorMessages;
 
     protected static Logger logger = Logger.getLogger(DefaultDAO.class);
 
@@ -44,6 +48,10 @@ public class DefaultDAO<T extends Object> {
         return object;
     }
 
+    public ArrayList<String> getErrorMessages() {
+        return errorMessages;
+    }
+    
     public void setObject(T object) {
         this.object = object;
     }
@@ -55,7 +63,7 @@ public class DefaultDAO<T extends Object> {
     /*
      @return <code>null</code> if object not found
      */
-    protected T getObjectByQuery(String query) throws JAXBException, IOException {
+    protected T getObjectByQuery(String query) throws JAXBException, IOException, SchemaException {
         ArrayList<String> res = query(query);
          return res.isEmpty() ? null : getObject(res.get(0));
     }
@@ -63,7 +71,7 @@ public class DefaultDAO<T extends Object> {
     /*
      @return <code>null</code> if object not found
      */
-    protected ArrayList<T> getObjectsByQuery(String query) throws IOException, JAXBException {
+    protected ArrayList<T> getObjectsByQuery(String query) throws IOException, JAXBException, SchemaException {
         return getObjects(query(query));
     }   
     
@@ -71,23 +79,35 @@ public class DefaultDAO<T extends Object> {
         return getObjects(query);
     }   
     
-    protected ArrayList<String> getResultByQuery(String query) throws IOException, JAXBException {
+    protected ArrayList<String> getResultByQuery(String query) throws IOException, JAXBException, SchemaException {
         return query(query);
     } 
 
     /*
      @return empty <code>ArrayList<String></code> if there is no result.
      */
-    protected ArrayList<String> query(String query) throws IOException {
+    protected ArrayList<String> query(String query) throws IOException, SchemaException {
         logger.debug("Query: " + query);
-        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\xquery.xq';\n"+query;        
-        return conn.query(query);
+        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at "+XQUERY_PATH+";\n"+query;        
+        ArrayList<String> result = conn.query(query);        
+        validate();
+        return result;
+    }
+    
+    public void validate() throws IOException, SchemaException {
+        String module = "import module namespace inf = 'http://inf.unideb.hu/xml' at "+XQUERY_PATH+";\n";                
+        errorMessages = conn.query(module + "inf:validate()"); 
+        logger.debug("MÉRET ELTN: " +errorMessages.size());
+        if (!errorMessages.isEmpty()) {
+            throw new SchemaException(errorMessages);
+        }
     }
 
-    protected void executeQuery(String query) throws IOException {
+    protected void executeQuery(String query) throws IOException, SchemaException {
         logger.debug("Query: " + query);
-        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\xquery.xq';\n"+query;
+        query = "import module namespace inf = 'http://inf.unideb.hu/xml' at "+XQUERY_PATH+";\n"+query;
         conn.executeQuery(query);
+        validate();
     }
 
     protected T getObject(String xml) throws JAXBException {

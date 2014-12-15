@@ -6,6 +6,7 @@
 package model;
 
 import dao.ClassDAO;
+import dao.SchemaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBException;
@@ -118,24 +119,24 @@ public class Class implements XmlID {
         this.lessons = lessons;
     }
 
-    public static Class find(String id) throws JAXBException, IOException {
+    public static Class find(String id) throws JAXBException, IOException, SchemaException {
         return new ClassDAO().find(id);
     }
 
-    public static ArrayList<Class> findAll() throws JAXBException, IOException {
+    public static ArrayList<Class> findAll() throws JAXBException, IOException, SchemaException {
         return new ClassDAO().findAll();
     }
 
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         Logger.getLogger("Class.java").warn(this.toString());
         new ClassDAO(this).add();
     }
     
-    public void updateTeacher() throws JAXBException, IOException {
+    public void updateTeacher() throws JAXBException, IOException, SchemaException {
         new ClassDAO(this).updateTeacher();
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new ClassDAO(this).remove();
     }        
 

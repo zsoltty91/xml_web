@@ -24,7 +24,7 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         super(Subject.class,subject);
     }
 
-    public Subject find(String id) throws JAXBException, IOException {
+    public Subject find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer/tantargyak/tantargy[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         }
     }
     
-    public ArrayList<Subject> findAll() throws JAXBException, IOException {
+    public ArrayList<Subject> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer/tantargyak/tantargy");
         } finally {
@@ -40,13 +40,13 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         }
     }
 
-    public void generateId() throws IOException {
+    public void generateId() throws IOException, SchemaException  {
         String query = query("inf:max-id-tantargy()").get(0);
         logger.info("Max id:"+query);
         object.setId(Integer.toString(Integer.parseInt(query)+1));
     }
     
-    public void add() throws IOException, JAXBException {
+    public void add() throws IOException, JAXBException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tantargyak");
@@ -55,7 +55,7 @@ public class SubjectDAO extends DefaultDAO<Subject> {
         }
     }
     
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/tantargyak/tantargy[@id='"+object.getId()+"']");
             executeQuery("delete node doc('rendszer')/rendszer//ora[tantargy[.='"+object.getId()+"']]");

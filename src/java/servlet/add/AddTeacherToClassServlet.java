@@ -29,7 +29,7 @@ public class AddTeacherToClassServlet extends CommonServlet {
             Teacher teacher = new Teacher();
             teacher.setId(tanar);
             try {
-                model.Class osztalyObj = model.Class.find(osztaly);
+                model.Class osztalyObj = model.Class.find(osztaly);                
                 osztalyObj.setTeacher(Teacher.find(tanar));
                 osztalyObj.updateTeacher();
                 successm = "Sikeresen hozzáadva!";

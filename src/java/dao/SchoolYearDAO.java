@@ -24,7 +24,7 @@ public class SchoolYearDAO extends DefaultDAO<SchoolYear> {
         super(SchoolYear.class, schoolYear);
     }
 
-    public SchoolYear find(String id) throws JAXBException, IOException {
+    public SchoolYear find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer/tanevek/tanev[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class SchoolYearDAO extends DefaultDAO<SchoolYear> {
         }
     }
 
-    public ArrayList<SchoolYear> findAll() throws JAXBException, IOException {
+    public ArrayList<SchoolYear> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer/tanevek/tanev");
         } finally {
@@ -48,7 +48,7 @@ public class SchoolYearDAO extends DefaultDAO<SchoolYear> {
         this.object.setId(sb.toString());
     }
 
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         generateId();        
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tanevek");
@@ -57,7 +57,7 @@ public class SchoolYearDAO extends DefaultDAO<SchoolYear> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/tanevek/tanev[@id='"+object.getId()+"']");
         } finally {

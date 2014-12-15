@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.SchemaException;
 import dao.StudentDAO;
 import dao.TeacherDAO;
 import java.io.IOException;
@@ -70,6 +71,12 @@ public class OfokFilter implements Filter {
             //throw new RuntimeException("itten");
         } catch (JAXBException ex) {
             Logger.getLogger(TopStudentsFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SchemaException se) {
+            StringBuilder sb = new StringBuilder();
+            for (String s : se.errors) {                
+                sb.append(s).append("<br>");                
+            }  
+            request.setAttribute("errorMessage", sb.toString());
         }
     }
 

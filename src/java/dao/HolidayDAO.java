@@ -24,7 +24,7 @@ public class HolidayDAO extends DefaultDAO<Holiday> {
         super(Holiday.class, holiday);
     }
 
-    public Holiday find(String id) throws JAXBException, IOException {
+    public Holiday find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')//szunet[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class HolidayDAO extends DefaultDAO<Holiday> {
         }
     }
 
-    public ArrayList<Holiday> findAll() throws JAXBException, IOException {
+    public ArrayList<Holiday> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')//szunet");
         } finally {
@@ -40,13 +40,13 @@ public class HolidayDAO extends DefaultDAO<Holiday> {
         }
     }
 
-    public void generateId() throws IOException {
+    public void generateId() throws IOException, SchemaException {
         String query = query("inf:max-id-szunet()").get(0);
         logger.info("Max id:"+query);
         object.setId(Integer.toString(Integer.parseInt(query)+1));
     }
     
-    public void add(String schoolYearId) throws JAXBException, IOException {
+    public void add(String schoolYearId) throws JAXBException, IOException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tanevek/tanev[@id='" + schoolYearId + "']/szunetek");
@@ -55,7 +55,7 @@ public class HolidayDAO extends DefaultDAO<Holiday> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer//szunet[@id='" + object.getId() + "']");
         } finally {

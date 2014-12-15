@@ -24,7 +24,7 @@ public class MarkDAO extends DefaultDAO<Mark> {
         super(Mark.class, mark);
     }
 
-    public Mark find(String id) throws JAXBException, IOException {
+    public Mark find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer//jegy[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class MarkDAO extends DefaultDAO<Mark> {
         }
     }
 
-    public ArrayList<Mark> findAll() throws JAXBException, IOException {
+    public ArrayList<Mark> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer//jegy");
         } finally {
@@ -40,13 +40,13 @@ public class MarkDAO extends DefaultDAO<Mark> {
         }
     }
 
-    public void generateId() throws IOException {
+    public void generateId() throws IOException, SchemaException {
         String query = query("inf:max-id-jegy()").get(0);
         logger.info("Max id:"+query);
         object.setId(Integer.toString(Integer.parseInt(query)+1));
     }
 
-    public void add(String studentId) throws IOException, JAXBException {
+    public void add(String studentId) throws IOException, JAXBException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/diakok/diak[@id='" + studentId + "']/jegyei");
@@ -55,7 +55,7 @@ public class MarkDAO extends DefaultDAO<Mark> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')//jegy[@id='" + object.getId() + "']");
         } finally {

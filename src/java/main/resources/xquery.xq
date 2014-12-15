@@ -6,7 +6,7 @@ declare function inf:validate() {
   try {
 validate:xsd(db:open('rendszer'), 'D:\\Dokumentumok\\Projektek\\Netbeans\\Java\\xml_web\\src\\java\\main\\resources\\rendszer.xsd')
 } catch bxerr:BXVA0001 {
-  '[ERROR]' || $err:description || 'Validation faile'
+  '[ERROR]' || $err:description
 }
 };
 
@@ -61,6 +61,19 @@ declare updating function inf:delete-szunet-from-tanev($tanev-id as xs:string, $
 
 declare updating function inf:delete-jegy-from-diak($diak-id as xs:integer, $jegy-id as xs:integer) {
   for $i in db:open('rendszer')/rendszer/diakok/diak[@id = $diak-id]/jegyei/jegy where data($i/@id) = $jegy-id return (delete node $i) 
+};
+
+declare updating function inf:delete-tanar-from-orarend() {
+  for $item in db:open('rendszer')//ora/tanar
+  return replace value of node $item with ''
+};
+
+declare updating function inf:update-tanar-into-osztaly($osztaly-id as xs:string, $tanar-id as xs:integer) {
+  if (exists(db:open('rendszer')/rendszer/osztalyok/osztaly[@id=$osztaly-id]/osztalyfonok))
+  then
+  replace value of node db:open('rendszer')/rendszer/osztalyok/osztaly[@id=$osztaly-id]/osztalyfonok with $tanar-id
+  else
+  insert node element osztalyfonok {$tanar-id} after doc('rendszer')/rendszer/osztalyok/osztaly[@id=$osztaly-id]/tanev
 };
 
 declare updating function inf:delete-fogadoora-from-tanar($fogadoora-id as xs:integer, $tanar-id as xs:integer) {

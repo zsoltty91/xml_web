@@ -267,11 +267,11 @@
                             <xs:element name="ora" minOccurs="0" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="nap" minOccurs="1" maxOccurs="1" type="napok-hu"></xs:element>
-                                        <xs:element name="idopont" minOccurs="1" maxOccurs="1" type="xs:time"></xs:element>
-                                        <xs:element name="tantargy" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
-                                        <xs:element name="tanar" minOccurs="1" maxOccurs="1" type="xs:integer"></xs:element>
-                                        <xs:element name="terem" minOccurs="1" maxOccurs="1" type="xs:token"></xs:element>
+                                        <xs:element name="nap" minOccurs="1" maxOccurs="1" type="napok-hu" nillable="true"></xs:element>
+                                        <xs:element name="idopont" minOccurs="1" maxOccurs="1" type="xs:time" nillable="true"></xs:element>
+                                        <xs:element name="tantargy" minOccurs="1" maxOccurs="1" type="xs:token" nillable="true"></xs:element>
+                                        <xs:element name="tanar" minOccurs="0" maxOccurs="1" type="xs:integer" nillable="true"></xs:element>
+                                        <xs:element name="terem" minOccurs="1" maxOccurs="1" type="xs:token" nillable="true"></xs:element>
                                     </xs:sequence>
                                     <xs:attribute name="id" use="required" type="xs:integer"></xs:attribute>
                                 </xs:complexType>

@@ -6,6 +6,7 @@
 package model;
 
 import dao.LessonDAO;
+import dao.SchemaException;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -108,19 +109,19 @@ public class Lesson implements XmlID {
         this.day = day;
     }
 
-    public static Lesson find(String id) throws JAXBException, IOException {
+    public static Lesson find(String id) throws JAXBException, IOException, SchemaException {
         return new LessonDAO().find(id);
     }
 
-    public static ArrayList<Lesson> findAll() throws JAXBException, IOException {
+    public static ArrayList<Lesson> findAll() throws JAXBException, IOException, SchemaException {
         return new LessonDAO().findAll();
     }
 
-    public void add(String classId) throws JAXBException, IOException {
+    public void add(String classId) throws JAXBException, IOException, SchemaException {
         new LessonDAO(this).add(classId);
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new LessonDAO(this).remove();
     }
 

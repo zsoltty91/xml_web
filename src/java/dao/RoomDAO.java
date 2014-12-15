@@ -24,7 +24,7 @@ public class RoomDAO extends DefaultDAO<Room> {
         super(Room.class, room);
     }
 
-    public Room find(int id) throws JAXBException, IOException {
+    public Room find(int id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer/termek/terem[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class RoomDAO extends DefaultDAO<Room> {
         }
     }
 
-    public ArrayList<Room> findAll() throws JAXBException, IOException {
+    public ArrayList<Room> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer/termek/terem");
         } finally {
@@ -42,7 +42,7 @@ public class RoomDAO extends DefaultDAO<Room> {
 
   
 
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/termek");
         } finally {
@@ -50,7 +50,7 @@ public class RoomDAO extends DefaultDAO<Room> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer/termek/terem[@id='" + object.getId() + "']");
             executeQuery("delete node doc('rendszer')//ora[terem[.='" + object.getId() + "']]");

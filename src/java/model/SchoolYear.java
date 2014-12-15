@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.SchemaException;
 import dao.SchoolYearDAO;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -86,19 +87,19 @@ public class SchoolYear implements XmlID{
         this.holidays = holidays;
     }
 
-    public static ArrayList<SchoolYear> findAll() throws JAXBException, IOException {
+    public static ArrayList<SchoolYear> findAll() throws JAXBException, IOException, SchemaException {
         return new SchoolYearDAO().findAll();
     }
 
-    public static SchoolYear find(String id) throws JAXBException, IOException {
+    public static SchoolYear find(String id) throws JAXBException, IOException, SchemaException {
         return new SchoolYearDAO().find(id);
     }
 
-    public void add() throws JAXBException, IOException {
+    public void add() throws JAXBException, IOException, SchemaException {
         new SchoolYearDAO(this).add();
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         new SchoolYearDAO(this).remove();
     }
 

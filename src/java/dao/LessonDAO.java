@@ -24,7 +24,7 @@ public class LessonDAO extends DefaultDAO<Lesson> {
         super(Lesson.class, lesson);
     }
 
-    public Lesson find(String id) throws JAXBException, IOException {
+    public Lesson find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')/rendszer//ora[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class LessonDAO extends DefaultDAO<Lesson> {
         }
     }
 
-    public ArrayList<Lesson> findAll() throws JAXBException, IOException {
+    public ArrayList<Lesson> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')/rendszer//ora");
         } finally {
@@ -40,13 +40,13 @@ public class LessonDAO extends DefaultDAO<Lesson> {
         }
     }
 
-    public void generateId() throws IOException {
+    public void generateId() throws IOException, SchemaException {
         String query = query("inf:max-id-ora()").get(0);
         logger.info("Max id:"+query);
         object.setId(Integer.toString(Integer.parseInt(query)+1));
     }
     
-    public void add(String classId) throws JAXBException, IOException {
+    public void add(String classId) throws JAXBException, IOException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/osztalyok/osztaly[@id='" + classId + "']/orarend");
@@ -55,7 +55,7 @@ public class LessonDAO extends DefaultDAO<Lesson> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer//ora[@id='" + object.getId() + "']");
         } finally {

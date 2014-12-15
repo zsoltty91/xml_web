@@ -24,7 +24,7 @@ public class ConsultingHourDAO extends DefaultDAO<ConsultingHour> {
         super(ConsultingHour.class, consultingHour);
     }
 
-    public ConsultingHour find(String id) throws JAXBException, IOException {
+    public ConsultingHour find(String id) throws JAXBException, IOException, SchemaException {
         try {
             return getObjectByQuery("doc('rendszer')//fogadoora[@id='" + id + "']");
         } finally {
@@ -32,7 +32,7 @@ public class ConsultingHourDAO extends DefaultDAO<ConsultingHour> {
         }
     }
 
-    public ArrayList<ConsultingHour> findAll() throws JAXBException, IOException {
+    public ArrayList<ConsultingHour> findAll() throws JAXBException, IOException, SchemaException {
         try {
             return getObjectsByQuery("doc('rendszer')//fogadoora");
         } finally {
@@ -40,13 +40,13 @@ public class ConsultingHourDAO extends DefaultDAO<ConsultingHour> {
         }
     }
 
-    public void generateId() throws IOException  {
+    public void generateId() throws IOException, SchemaException  {
         String query = query("inf:max-id-fogadoora()").get(0);
         logger.info("Max id:"+query);
         object.setId(Integer.toString(Integer.parseInt(query)+1));
     }
     
-    public void add(String teacherId) throws JAXBException, IOException {
+    public void add(String teacherId) throws JAXBException, IOException, SchemaException {
         generateId();
         try {
             executeQuery("insert node " + getXml(object) + " into doc('rendszer')/rendszer/tanarok/tanar[@id='" + teacherId + "']/fogadoorak");
@@ -55,7 +55,7 @@ public class ConsultingHourDAO extends DefaultDAO<ConsultingHour> {
         }
     }
 
-    public void remove() throws IOException {
+    public void remove() throws IOException, SchemaException {
         try {
             executeQuery("delete node doc('rendszer')/rendszer//fogadoora[@id='" + object.getId() + "']");
         } finally {
