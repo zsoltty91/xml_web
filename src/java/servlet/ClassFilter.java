@@ -76,6 +76,7 @@ public class ClassFilter implements Filter {
             }
             request.setAttribute("class", cl);
             request.setAttribute("teachers", new TeacherDAO().findNemOsztalyfonokok());
+            request.setAttribute("allteacher", Teacher.findAll());
             request.setAttribute("subjects", Subject.findAll());
             request.setAttribute("rooms", Room.findAll());
             request.setAttribute("students", new StudentDAO().findWithoutClass(tanev));

@@ -203,7 +203,7 @@
                         <td>Tanár:</td>
                         <td>
                             <select name="tanar" class="chzn-choices" style="width: 12em;">
-                                <c_rt:forEach var="teacher" items="${teachers}">
+                                <c_rt:forEach var="teacher" items="${allteacher}">
                                     <option value="${teacher.id}" selected>${teacher.name}</option>
                                 </c_rt:forEach>          
                             </select>
